@@ -1,0 +1,49 @@
+.form-floating {
+    margin-bottom: 10px;;
+}
+
+.form-control.error {
+    border-color: #e74c3c;
+    opacity: 0.95;
+}
+
+.form-control:focus.error {
+    box-shadow: 0 0 0 0.2rem #e74d3c66;
+}
+
+.form-floating.error > .form-control.error:not(:placeholder-shown) ~ label{
+    color: #e74c3c;
+    opacity: 0.95;
+}
+
+.form-control.valid {
+    border-color: #0e9e4a;
+    opacity: 0.95;
+}
+
+.form-control:focus.valid {
+    box-shadow: 0 0 0 0.2rem #0e9e4a66;
+}
+
+.form-floating.valid > .form-control.valid:not(:placeholder-shown) ~ label{
+    color: #0e9e4a;
+    opacity: 0.95;
+}
+
+.mb-3.error{
+    color: #e74c3c;
+    border-color: #e74c3c;
+}
+
+.mb-3.error > label{
+    color: #e74c3c;
+}
+
+.mb-3.valid{
+    color: #0e9e4a;;
+    border-color: #0e9e4a;;
+}
+
+.mb-3.valid > label{
+    color: #0e9e4a;;
+}
