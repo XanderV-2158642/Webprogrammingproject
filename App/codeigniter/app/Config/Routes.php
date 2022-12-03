@@ -38,6 +38,7 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 $routes->get('/Shop', 'Shop::index');
 $routes->get('/Wood', 'Shop::Wood');
+$routes->get('/Profile', 'Profile::index');
 
 /*
  * --------------------------------------------------------------------

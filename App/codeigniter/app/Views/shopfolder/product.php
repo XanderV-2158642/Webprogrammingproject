@@ -31,26 +31,56 @@
                     <div class="col-sm-6">
                         <h2><?= $product['product_title'] ?></h2>
                         <h4><?= $product['product_sort'] ?></h4>
+                        <div>
+                            <p> 
+                                <?= $product['product_description'] ?><br>
+                            </p>
+                            <p>
+                                From: <?= $product['product_heritage'] ?>
+                            </p>
+                        </div>
                     </div>
                     <div class="col-sm-6">
                         <?php if ($product['product_type'] !== 'electricity'):?>
                             <h3><?= $product['product_size']." ".$sizeunit[$product['product_type']]?></h3>
                         <?php endif;?>
                         <h3 style="display: inline;">€<?= $product['product_price']?></h3>
-                        <h5 class="text-black-50" style="display: inline;"> /<?= $packaging[$product['product_type']]?></h5>
+                        <h3 class="text-black-50" style="display: inline;"> /<?= $packaging[$product['product_type']]?></h3><br><br>
+                        <h5 class="text-black-50"><?=$product['product_amount']?> items left</h5>
                     </div>
                 </div>
-                <div>
-                    <p> 
-                        <?= $product['product_description'] ?><br>
-                    </p>
-                    <p>
-                        From: <?= $product['product_heritage'] ?>
-                    </p>
-                </div>
+                
             </div>
-            <div>
-                <a href="#" class = " btn btn-primary"> Add to cart</a>
+            <div class="row">
+                <div class="col-md-6">
+                    <?php if ($product['product_amount']>0):?>
+                    <form action="/Cart/addtocart/<?=$product['product_id']?>" class="text-center" method="post">
+                        <div class="form-floating">           
+                            <input type="number" class="form-control" name="product_amount" id="itemamount" style="margin-top: 10px; margin-bottom: 10px;">
+                            <label for="itemamount">Amount</label>
+                        </div>
+                        <div class="form-floating" >
+                            <button class="btn btn-primary" type="submit" style="margin: 10px">Add to cart</button>
+                        </div>
+                    </form>
+                    <?php else:?>
+                        <h6>No items left, Want to receive a notification when item is back in stock?</h6>
+                        <a class="btn btn-primary" href="/notifications/addnotification/<?=$product['product_id']?>"> Notify me </a>
+                    <?php endif;?>
+                </div>
+                <div class="col-md-6 text-center">
+                    <a href="/Profile/profilepage/<?=$product['user_id']?>" class = "btn btn-warning" style="margin: 10px"> Go to seller profile</a>
+                    <?php if (session()->getFlashdata('succesfully_added')):?>
+                        <div class="alert alert-success text-center">
+                            <h6><?= session()->getFlashdata('succesfully_added')?></h6>
+                        </div>
+                    <?php endif;?>
+                    <?php if (session()->getFlashdata('amount_input')):?>
+                        <div class="alert alert-danger text-center">
+                            <h6><?= session()->getFlashdata('amount_input')?></h6>
+                        </div>
+                    <?php endif;?>
+                </div>
             </div>
         </div>
     </div>

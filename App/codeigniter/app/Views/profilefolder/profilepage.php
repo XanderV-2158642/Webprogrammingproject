@@ -56,17 +56,28 @@
         <?php foreach($products as $product): ?>
             <div class = "card" style = "margin-bottom: 10px">
                 <div class = "card-body">
-                    <div style ="margin-bottom: 10px;">
-                        <h5 style="display: inline;"><a href="/product/productpage/<?= $product['product_id']?>" class="link-dark" ><?=$product['product_title'] ?></a></h5>
-                        <p style="display: inline; float: right; padding: 0; margin: 0;">€<?= $product['product_price']?></p>
-                        <?php if ($product['product_type'] !== 'electricity'):?>
-                            <h6><?= $product['product_sort']?></h6>
-                        <?php endif;?>
-                    </div>
-                    <div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h5><a href="/product/productpage/<?= $product['product_id']?>" class="link-dark" ><?=$product['product_title'] ?></a></h5>
+                            <?php if ($product['product_type'] !== 'electricity'):?>
+                                <h6><?= $product['product_sort']?></h6>
+                            <?php endif;?>
+                            <p>€<?= $product['product_price']?></p>
+                            <p>Amount left: <?=$product['product_amount']?></p>
+                            <p>Amount sold: <?=$product['amount_sold']?></p>
+                        </div>
+                        <div class="col-md-5">
+                            <p>
+                                <?= $product['product_description']?>
+                            </p>
+                        </div>
                         <?php if($page === $loggedinuser):?>
-                        <a href="/product/edit/<?= $product['product_id']?>" class = " btn btn-warning">Edit</a>                       
-                        <a href="#" class = "btn btn-danger text-end" style="float: right;">Remove</a>
+                            <div class="col-md-2">
+                                <a href="/product/edit/<?= $product['product_id']?>" class = " btn btn-warning">Edit</a>     
+                            </div>
+                            <div class="col-md-2">               
+                                <a href="/product/removeproduct/<?= $product['product_id']?>" class = "btn btn-danger text-end">Remove</a>
+                            </div> 
                         <?php endif;?>
                     </div>
                 </div>

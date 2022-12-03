@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\DeliveryModel;
+use App\Models\PickupModel;
 use App\Models\ProductModel;
 use App\Models\ProfilepicModel;
 use App\Models\UserModel;
@@ -30,6 +32,11 @@ class Profile extends BaseController
 
         $producttable = new ProductModel();
         $products = $producttable->where('user_id', $id)->findAll();
+        $prods = [];
+        foreach ($products as $product){
+            $product['amount_sold'] = $this->getSoldAmount($product['product_id']);
+            array_push($prods, $product);
+        }
 
         if ($profile == null){
             $data = [
@@ -44,7 +51,7 @@ class Profile extends BaseController
                 'Email' => $profile['user_email'],
                 'Phone' => $profile['user_phone'],
                 'pictures' => $pics,
-                'products' => $products
+                'products' => $prods
             ];
         }
 
@@ -204,7 +211,6 @@ class Profile extends BaseController
                     'user_name' => $this->request->getPost('user_name'),
                     'user_phone' => $this->request->getPost('user_phone'),
                     'user_description' => $this->request->getPost('user_description'),
-
                 ];
                 if($this->request->getPost('user_password') !=''){
                     $newdata['user_password'] = password_hash($this->request->getPost('user_password'), PASSWORD_DEFAULT);
@@ -267,5 +273,24 @@ class Profile extends BaseController
         $profilepics->delete($pictoremove['picture_id']);
         
         return redirect()->to('/Profile/edit');
+    }
+
+    private function getSoldAmount($product_id){
+        $deliverytable = new DeliveryModel();
+        $pickuptable = new PickupModel();
+
+        $amount_sold = 0;
+
+        $deliveries = $deliverytable->where('product_id', $product_id)->findAll();
+        foreach($deliveries as $delivery){
+            $amount_sold += $delivery['amount'];
+        }
+
+        $pickups = $pickuptable->where('product_id', $product_id)->findAll();
+        foreach($pickups as $pickup){
+            $amount_sold += $pickup['amount'];
+        }
+
+        return $amount_sold;
     }
 }

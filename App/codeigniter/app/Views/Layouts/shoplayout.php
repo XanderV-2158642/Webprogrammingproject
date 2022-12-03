@@ -13,8 +13,9 @@
     <nav class= "navbar navbar-expand-lg" style = "background-color: #EEEEEE;">
         <a class="navbar-brand" href="/">Home</a>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item"><a class="nav-link" aria-current="page" href="#">Cart</a></li>
-            <li class="nav-item"><a class="nav-link" aria-current="page" href="#">Messages</a></li>
+            <li class="nav-item"><a class="nav-link" aria-current="page" href="/Cart">Cart</a></li>
+            <li class="nav-item"><a class="nav-link" aria-current="page" href="/Messages">Messages</a></li>
+            <li class="nav-item"><a class="nav-link" aria-current="page" href="/Orders">Orders</a></li>
         </ul>
         <span class="navbar-text">Your energy solution</span>
     </nav>  

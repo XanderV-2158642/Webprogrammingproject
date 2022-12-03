@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\CartModel;
 use App\Models\ProductModel;
 use App\Models\ProductpicModel;
 use CodeIgniter\Validation\Rules;
@@ -62,7 +63,7 @@ class Product extends BaseController {
                 $files = $this->request->getFileMultiple('product_picture');
 
                 $this->insertdata($newdata, $files);
-                return redirect()->to('/profile');
+                return redirect()->to(base_url('/profile'));
             }
         }
         return view('/productcreatefolder/createwd', $data);
@@ -312,6 +313,25 @@ class Product extends BaseController {
 
             $picturetable->delete($picture['picture_id']);
 
+            return redirect()->back();
+        }
+    }
+
+    public function removeproduct($product_id){
+        $producttable = new ProductModel();
+
+        $product = $producttable->find($product_id);
+
+        $session_user = session()->get('user_id');
+
+        if ($session_user == $product['user_id']){
+            $picturetable = new ProductpicModel();
+            $pictures = $picturetable->where('product_id', $product['product_id'])->findAll();
+            foreach ($pictures as $pic){
+                $this->removepic($pic['picture_id']);
+            }
+
+            $producttable->delete($product_id);
             return redirect()->back();
         }
     }
