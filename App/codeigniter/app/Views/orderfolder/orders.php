@@ -77,7 +77,7 @@
                                     if($p_o_d['order']['delivered']):?>
                                         <a href="" class="btn btn-secondary disabled" style="margin-bottom:5px;">Order delivered</a><br>
                                         <?php if(!isset($p_o_d['order']['reviewwritten'])):?>
-                                            <a href="/reviews/writereview/<?=$p_o_d['product']['product_id']?>" class="btn btn-primary">Write review</a>
+                                            <a href="/Reviews/writereview/<?=$p_o_d['product']['product_id']?>" class="btn btn-primary">Write review</a>
                                         <?php endif;?>
                                     <?php else:?>
                                         <a href="/Orders/cancelorder/delivery/<?= $p_o_d['order']['order_id']?>" class="btn btn-danger">Cancel</a>
@@ -86,7 +86,7 @@
                                 if($p_o_d['order']['pickedup']):?>
                                     <a href="" class="btn btn-secondary disabled" style="margin-bottom:5px;">Order picked up</a><br>
                                     <?php if(!isset($p_o_d['order']['reviewwritten'])):?>
-                                        <a href="/reviews/writereview/<?=$p_o_d['product']['product_id']?>" class="btn btn-primary">Write review</a>
+                                        <a href="/Reviews/writereview/<?=$p_o_d['product']['product_id']?>" class="btn btn-primary">Write review</a>
                                     <?php endif;?>
                                 <?php else:?>
                                     <a href="/Orders/cancelorder/pickup/<?= $p_o_d['order']['order_id']?>" class="btn btn-danger">Cancel</a>

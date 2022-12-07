@@ -9,7 +9,7 @@
                 <?= $validation->listErrors() ?>
             </div>
         <?php endif ; ?>
-        <form method = "post" action="/profile/createprofile" id="form" enctype="multipart/form-data">
+        <form method = "post" action="/Profile/createprofile" id="form" enctype="multipart/form-data">
             <h2>Fill in the form to create an account</h2>
             <div class="form-floating">
                 <input type="text" name="user_name" class = "form-control" id="username">

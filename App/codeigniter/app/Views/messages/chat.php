@@ -15,7 +15,7 @@
         </div>
         <?php for ($i = count($messages)-1; $i > -1; $i--):
             $message = $messages[$i]; ?>
-            <div class="card" style="margin-bottom: 8px; width: fit-content; <?=($corr_id == $message['receiver_id']) ? "margin-left: auto; margin-right: 0;" : "" ?>">
+            <div class="card" style="margin-bottom: 8px; width: fit-content; max-width: 75%; <?=($corr_id == $message['receiver_id']) ? "margin-left: auto; margin-right: 0;" : "" ?>">
                 <div class="card-body">
                     <p class = "card-text"> <?= $message['message']?></p>
                 </div>
@@ -24,7 +24,7 @@
         <hr>
     </div>
     <div class="w-75 text-center">
-        <a href="/messages/writemessage/<?=$corr_id?>" class="btn btn-primary">Respond</a>
+        <a href="/Messages/writemessage/<?=$corr_id?>" class="btn btn-primary">Respond</a>
     </div>
 </main>
 

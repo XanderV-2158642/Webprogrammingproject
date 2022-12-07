@@ -10,7 +10,7 @@
                 <?= $validation->listErrors() ?>
             </div>
         <?php endif ; ?>
-        <form action="/product/creategas" class = "w-75" method="post" enctype="multipart/form-data">
+        <form action="/Product/creategas" class = "w-75" method="post" enctype="multipart/form-data">
             <div class="row mb-3">
                 <label for="producttitle" class="col-sm-3 col-form-label">Title</label>
                 <div class = "col-sm-9">

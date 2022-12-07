@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 use App\Models\DeliveryModel;
+use App\Models\NotificationModel;
+use App\Models\NotifyRequestModel;
 use App\Models\PickupModel;
 use App\Models\ProductModel;
 use App\Models\ReviewModel;
@@ -38,7 +40,14 @@ class Orders extends BaseController
         $unhandled = [];
         $delivered = [];
         foreach($seller_orders as $order){
-            if ($order['delivered'] == 0){
+            if (isset($order['delivered'])){
+                $confirmation = 'delivered';
+            }else{
+                $confirmation = 'pickedup';
+            }
+
+
+            if ($order[$confirmation] == 0){
                 array_push($unhandled, $order);
             } else {
                 array_push($delivered, $order);
@@ -139,7 +148,7 @@ class Orders extends BaseController
             $ordertable = new PickupModel();
             $confirmation = 'pickedup';
         } else {
-            return redirect()->to(base_url('/orders'));
+            return redirect()->to(base_url('/Orders'));
         }
         
         $order = $ordertable->find($order_id);
@@ -149,10 +158,25 @@ class Orders extends BaseController
             $product['product_amount'] = $order['amount'] + $product['product_amount'];
             $producttable->update($product['product_id'], $product);
 
+            $this->transfernotification($order['product_id']);
+
             $ordertable->delete($order_id);
         }
 
         return redirect()->to(base_url('/Orders'));
+    }
+
+    private function transfernotification($product_id){
+        $nreqtable = new NotifyRequestModel();
+        $rtable = new NotificationModel();
+
+        $reqs = $nreqtable->where('product_id', $product_id)->findAll();
+        foreach ($reqs as $r){
+            $r['beenread'] = 0;
+            $nreqtable->delete($r['notification_id']);
+            unset($r['notification_id']);
+            $rtable->insert($r);
+        }
     }
 
     public function completeOrder($type, $order_id){
@@ -165,7 +189,7 @@ class Orders extends BaseController
             $ordertable = new PickupModel();
             $confirmation = 'pickedup';
         } else {
-            return redirect()->to(base_url('/orders'));
+            return redirect()->to(base_url('/Orders'));
         }
 
         $order = $ordertable->find($order_id);

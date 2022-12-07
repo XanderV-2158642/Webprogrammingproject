@@ -42,15 +42,15 @@
             <h6><?= $Email?></h6>
             <h6><?= $Phone?></h6>
             <?php if($page !== $loggedinuser): ?>
-                <a href="#" class = "btn btn-primary" style="margin-bottom: 10px;"> Message this user</a>
+                <a href="/Messages/writemessage/<?=$page?>" class = "btn btn-primary" style="margin-bottom: 10px;"> Message this user</a>
             <?php endif; ?>
         </div>
     </div>
     <?php if($page === $loggedinuser):?>
-        <a href="/profile/logout" class = "btn btn-secondary" style="margin-bottom: 10px;">Log out</a>
-        <a href="/profile/edit" class = "btn btn-warning" style="margin-bottom: 10px; float: right;">Edit profile</a></br>
+        <a href="/Profile/logout" class = "btn btn-secondary" style="margin-bottom: 10px;">Log out</a>
+        <a href="/Profile/edit" class = "btn btn-warning" style="margin-bottom: 10px; float: right;">Edit profile</a></br>
         <hr>
-        <a href="/product/createproduct" class = "btn btn-primary" style="margin-bottom: 10px;"> Sell new product</a>
+        <a href="/Product/createproduct" class = "btn btn-primary" style="margin-bottom: 10px;"> Sell new product</a>
     <?php endif;?>
         <h5>Active products</h5>
         <?php foreach($products as $product): ?>
@@ -58,13 +58,15 @@
                 <div class = "card-body">
                     <div class="row">
                         <div class="col-md-3">
-                            <h5><a href="/product/productpage/<?= $product['product_id']?>" class="link-dark" ><?=$product['product_title'] ?></a></h5>
+                            <h5><a href="/Product/productpage/<?= $product['product_id']?>" class="link-dark" ><?=$product['product_title'] ?></a></h5>
                             <?php if ($product['product_type'] !== 'electricity'):?>
                                 <h6><?= $product['product_sort']?></h6>
                             <?php endif;?>
                             <p>€<?= $product['product_price']?></p>
+                            <?php if ($page === $loggedinuser):?>
                             <p>Amount left: <?=$product['product_amount']?></p>
                             <p>Amount sold: <?=$product['amount_sold']?></p>
+                            <?php endif;?>
                         </div>
                         <div class="col-md-5">
                             <p>
@@ -73,10 +75,10 @@
                         </div>
                         <?php if($page === $loggedinuser):?>
                             <div class="col-md-2">
-                                <a href="/product/edit/<?= $product['product_id']?>" class = " btn btn-warning">Edit</a>     
+                                <a href="/Product/edit/<?= $product['product_id']?>" class = " btn btn-warning">Edit</a>     
                             </div>
                             <div class="col-md-2">               
-                                <a href="/product/removeproduct/<?= $product['product_id']?>" class = "btn btn-danger text-end">Remove</a>
+                                <a href="/Product/removeproduct/<?= $product['product_id']?>" class = "btn btn-danger text-end">Remove</a>
                             </div> 
                         <?php endif;?>
                     </div>

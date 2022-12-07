@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Models\CartModel;
 use App\Models\ProductModel;
+use CodeIgniter\HTTP\Response;
+use SebastianBergmann\CodeCoverage\Report\Xml\Method;
 
 class Cart extends BaseController
 {
@@ -103,6 +105,62 @@ class Cart extends BaseController
         return redirect()->to(base_url('/Cart'));
     }
 
+    public function ajaxtest($inputnumber){
+        $request = service('request');
+        if ($request->isAJAX()) {
+            $user_id = session()->get('user_id');
+
+            $carttable = new CartModel();
+            $cartitems = $carttable->where('user_id', $user_id)->findAll();
+
+            $cartitem = $cartitems[$inputnumber-1];     
+
+            $json = $request->getBody();          
+            $json = json_decode($json);
+
+            $data_array = [
+                'cart_item' => $cartitem,
+                'item_amount' => $json->number
+            ];
+
+            $message = $this->updateline($data_array['cart_item'], $data_array['item_amount']);
+
+            $jsonelement = json_encode($message, JSON_PRETTY_PRINT);
+
+            $response = service('response');
+            $response->setStatusCode(Response::HTTP_OK);
+            $response->setBody($jsonelement);
+            $response->setHeader('Content-type', 'text/html');
+            $response->send();
+            return;
+        }
+    }
+
+    private function updateline($cartitem, $newamount){
+        $user_id = session()->get('user_id');
+
+        $carttable = new CartModel();
+        $producttable = new ProductModel();
+        $product = $producttable->find($cartitem['product_id']);
+
+        if ($user_id == $cartitem['user_id']){
+            if ($newamount <= 0 || $newamount == ""){
+                return "please choose an amount, no changes made!";
+            } else if ($newamount > $product['product_amount']){
+                session()->setFlashdata('amount_input'.$cartitem['cart_item_id'], 'There are only '.$product['product_amount'].' items left!');
+                return "amount too high, no changes made!";
+            } else {
+                $updatedata = [
+                    'cart_item_id' => $cartitem['cart_item_id'],
+                    'product_amount' => $newamount
+                ];
+                $carttable->save($updatedata);
+                return "succesfully updated!";
+            }
+        }
+    }
+
+
     public function removeproduct($cart_item_id){
         $session = session();
         $carttable = new CartModel();
@@ -111,6 +169,6 @@ class Cart extends BaseController
         if($cartrow['user_id'] == $session->get('user_id')){
             $carttable->delete($cart_item_id);
         }
-        return redirect()->to(base_url('/cart'));
+        return redirect()->to(base_url('/Cart'));
     }
 }

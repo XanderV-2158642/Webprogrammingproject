@@ -11,7 +11,7 @@
                     <?= $validation->listErrors() ?>
                 </div>
             <?php endif ; ?>
-            <form action="/checkout/pickup" method="post">
+            <form action="/Checkout/pickup" method="post">
                 <div class="form-floating">
                     <input class="form-control" type="date" name="date" id="date">
                     <label for="date">Date</label>

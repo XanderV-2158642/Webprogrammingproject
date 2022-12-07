@@ -84,6 +84,7 @@ class Messages extends BaseController
                     'beenread' => 0
                 ];
                 $messagetable->insert($message);
+                return redirect()->to(base_url('/Messages'));
             } else {
                 $data['validation'] = $this->validator;
             }

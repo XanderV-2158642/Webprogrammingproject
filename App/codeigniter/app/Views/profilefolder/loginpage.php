@@ -21,7 +21,7 @@
             </div>
         <?php endif ;?>
 
-        <form method = "post" action="/profile" id ="form">
+        <form method = "post" action="/Profile" id ="form">
             <h2>Sign in</h2>
             <div class="form-floating">
                 <input type="email" name = "user_email" id= "email" class = "form-control">
@@ -36,7 +36,7 @@
     </div>
     <div>
         <h3>No profile yet?</h3>
-        <a href="/profile/createprofile" class = "btn btn-primary">Create Profile</a>
+        <a href="/Profile/createprofile" class = "btn btn-primary">Create Profile</a>
     </div>
 </main>
 

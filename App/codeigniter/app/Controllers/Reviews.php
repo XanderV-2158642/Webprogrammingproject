@@ -14,9 +14,9 @@ class Reviews extends BaseController
 
     public function writereview($product_id){
         if (!$this->checkifbought($product_id)){
-            return redirect()->to(base_url('/orders'));
+            return redirect()->to(base_url('/Orders'));
         } elseif ($this->checkifalreadywritten($product_id)){
-            return redirect()->to(base_url('/orders'));
+            return redirect()->to(base_url('/Orders'));
         }
 
         $producttable = new ProductModel();

@@ -11,7 +11,7 @@
                     <?= $validation->listErrors() ?>
                 </div>
             <?php endif ; ?>
-            <form action="/checkout/delivery" method="post">
+            <form action="/Checkout/delivery" method="post">
                 <div class="form-floating">
                     <input class="form-control" type="text" name="country" id="country">
                     <label for="country">Country</label>

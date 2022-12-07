@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-sm-6" style="margin-bottom: 10px;">
         <h4>Choose how you want to get your items</h4>
-            <form action="/checkout" method="post">
+            <form action="/Checkout" method="post">
                 <fieldset>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="ordertype" value="pickup" id="PickupOrder" checked>

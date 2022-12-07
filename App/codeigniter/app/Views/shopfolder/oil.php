@@ -4,7 +4,7 @@
 
 <main class = "container">
 
-    <form class="form" style = "margin-bottom: 30px;">
+    <form class="form" style = "margin-bottom: 30px;" method="get" action="/Shop/oil">
         <div class="row w-75 mx-auto">
             <div class="col d-flex align-items-center justify-content-center" style = "margin-bottom: 10px;">
                 <div>
@@ -71,7 +71,7 @@
                             <?php if ($product['product_type'] !== 'electricity'):?>
                             <h5 class="text-black-50">of <?= $product['product_size']." ".$product['unit']?></h5>
                             <?php else: echo '<br>'; endif;?>
-                            <a href="/product/productpage/<?= $product['product_id']?>" class="btn btn-primary">Buy</a>
+                            <a href="/Product/productpage/<?= $product['product_id']?>" class="btn btn-primary">Buy</a>
                         </div>
                     </div>
                 </div>
@@ -84,12 +84,12 @@
     <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
             <li class="page-item <?= $pagenr == 1 ? 'disabled' : ''?>">
-                <a class="page-link" href="/shop/oil/<?=$pagenr-1?>/<?=$filteruri?>">Previous</a>
+                <a class="page-link" href="/Shop/oil/<?=$pagenr-1?>/<?=$filteruri?>">Previous</a>
             </li>
 
             <!--first page-->
             <?php if ($pagenr != 1): ?>
-                <li class="page-item"><a class="page-link" href="/shop/oil/1/<?=$filteruri?>">1</a></li>
+                <li class="page-item"><a class="page-link" href="/Shop/oil/1/<?=$filteruri?>">1</a></li>
             <?php endif;?>
 
             <?php if (($pagenr - 2) > 2): ?>
@@ -101,7 +101,7 @@
             <?php for ($i = -2; $i < 0 ; $i++):
                 if (($pagenr + $i)>1):?>
                 <li class="page-item">
-                    <a class="page-link" href="/shop/oil/<?=$pagenr + $i?>/<?=$filteruri?>"><?= $pagenr + $i?></a>
+                    <a class="page-link" href="/Shop/oil/<?=$pagenr + $i?>/<?=$filteruri?>"><?= $pagenr + $i?></a>
                 </li>
             <?php endif ; endfor;?>
 
@@ -114,7 +114,7 @@
             <?php for ($i = 1; $i < 3 ; $i++):
                 if (($pagenr + $i)<$lastpage):?>
                 <li class="page-item">
-                    <a class="page-link" href="/shop/oil/<?=$pagenr + $i?>/<?=$filteruri?>"><?= $pagenr + $i?></a>
+                    <a class="page-link" href="/Shop/oil/<?=$pagenr + $i?>/<?=$filteruri?>"><?= $pagenr + $i?></a>
                 </li>
             <?php endif ; endfor;?>
 
@@ -126,12 +126,12 @@
 
             <!--last page-->
             <?php if ($pagenr != $lastpage): ?>
-                <li class="page-item"><a class="page-link" href="/shop/oil/<?=$lastpage?>/<?=$filteruri?>"><?= $lastpage?></a></li>
+                <li class="page-item"><a class="page-link" href="/Shop/oil/<?=$lastpage?>/<?=$filteruri?>"><?= $lastpage?></a></li>
             <?php endif;?>
 
             
             <li class="page-item">
-                <a class="page-link <?= ($pagenr == $lastpage) ? 'disabled': ''?>" href="/shop/oil/<?=$pagenr+1?>/<?=$filteruri?>">Next</a>
+                <a class="page-link <?= ($pagenr == $lastpage) ? 'disabled': ''?>" href="/Shop/oil/<?=$pagenr+1?>/<?=$filteruri?>">Next</a>
             </li>
         </ul>
     </nav>

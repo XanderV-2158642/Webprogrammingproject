@@ -35,7 +35,7 @@ class Checkout extends BaseController
 
         if (empty($cartitems)){
             $data['emptycart'] = 'true';
-            return redirect()->to(base_url('/cart'));
+            return redirect()->to(base_url('/Cart'));
         }
 
         if ($this->request->getMethod()=='post'){
@@ -44,7 +44,7 @@ class Checkout extends BaseController
             ];
             if($this->validate($rules)){
                 $ordertype = $this->request->getPost('ordertype');
-                return redirect()->to(base_url('/checkout'."/".$ordertype));
+                return redirect()->to(base_url('/Checkout'."/".$ordertype));
             }
         }
 
@@ -81,7 +81,7 @@ class Checkout extends BaseController
             if($this->validate($rules)){
                 $address = $_POST;
                 $this->ordercartdelivery($address, $products);
-                return redirect()->to(base_url('/orders'));
+                return redirect()->to(base_url('/Orders'));
             } else {
                 $data['validation'] = $this->validator;
             }
@@ -166,7 +166,7 @@ class Checkout extends BaseController
             if($this->validate($rules)){
                 $time = $_POST;
                 $this->ordercartpickup($time, $products);
-                //return redirect()->to(base_url('/orders'));
+                return redirect()->to(base_url('/Orders'));
             } else {
                 $data['validation'] = $this->validator;
             }

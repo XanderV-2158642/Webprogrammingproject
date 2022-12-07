@@ -80,6 +80,11 @@
                             <h6><?= session()->getFlashdata('amount_input')?></h6>
                         </div>
                     <?php endif;?>
+                    <?php if (session()->getFlashdata('notifysucces')):?>
+                        <div class="alert alert-success text-center">
+                            <h6><?= session()->getFlashdata('notifysucces')?></h6>
+                        </div>
+                    <?php endif;?>
                 </div>
             </div>
         </div>
@@ -90,9 +95,9 @@
         <?php foreach ($reviews as $review): ?>
             <div class = "card" style = "margin-bottom: 10px">
                 <div class = "card-body">
-                    <h5><?=$review['writer'] ?></h5>
-                    <p class= "card-text"><?=$review['rating'] ?>/5</p>
-                    <p class= "card-text"><?=$review['overview'] ?></p>
+                    <h5><?=$review['user']['user_name'] ?></h5>
+                    <p class= "card-text"><?=$review['score'] ?>/5</p>
+                    <p class= "card-text"><?=$review['description'] ?></p>
                 </div>
             </div>
         <?php endforeach ?>

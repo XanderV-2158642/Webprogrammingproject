@@ -15,7 +15,7 @@
                 <?= $validation->listErrors() ?>
             </div>
         <?php endif ; ?>
-        <form method = "post" action="/profile/edit" id="form" style="margin-bottom: 10px;" enctype="multipart/form-data">
+        <form method = "post" action="/Profile/edit" id="form" style="margin-bottom: 10px;" enctype="multipart/form-data">
             <h2>Edit the field you want to change</h2>
             <div class ="row">
                 <div class="col-sm" >
@@ -65,7 +65,7 @@
             foreach($pictures as $picdata): ?>
                 <div class="col-sm text-center">
                 <img src="/Images/Profile/<?= $picdata['picture_name']?>" style="max-width: 600px; max-height: 300px; margin-bottom: 10px;"></br>
-                <a href="/profile/removepic/<?= $iterate?>" class = "btn btn-danger" style="margin-bottom: 10px;">remove Picture</a>
+                <a href="/Profile/removepic/<?= $iterate?>" class = "btn btn-danger" style="margin-bottom: 10px;">remove Picture</a>
                 </div>
             <?php 
             $iterate = $iterate +1;

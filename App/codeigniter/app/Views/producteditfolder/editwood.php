@@ -10,7 +10,7 @@
                 <?= $validation->listErrors() ?>
             </div>
         <?php endif ; ?>
-        <form action="/product/edit/<?=$product['product_id']?>" class = "w-75" method="post" enctype="multipart/form-data">
+        <form action="/Product/edit/<?=$product['product_id']?>" class = "w-75" method="post" enctype="multipart/form-data">
             <div class="row mb-3">
                 <label for="producttitle" class="col-sm-3 col-form-label">Title</label>
                 <div class = "col-sm-9">
@@ -97,7 +97,7 @@
                     <div class="col-sm text-center">
                         <img src="/Images/Product/<?= $picdata['picture_name']?>" style="max-width: 600px; max-height: 300px; margin-bottom: 10px;"></br>
                         <?php if(sizeof($pictures)>1):?>
-                            <a href="/product/removepic/<?= $picdata['picture_id']?>" class = "btn btn-danger" style="margin-bottom: 10px;">remove Picture</a>
+                            <a href="/Product/removepic/<?= $picdata['picture_id']?>" class = "btn btn-danger" style="margin-bottom: 10px;">remove Picture</a>
                         <?php else:?>
                             <small>You cant remove this image because a product always needs an image</small>
                         <?php endif;?>

@@ -9,7 +9,7 @@
             <?= $validation->listErrors() ?>
         </div>
     <?php endif ; ?>
-    <form action="/reviews/writereview/<?=$product['product_id']?>" method="post">
+    <form action="/Reviews/writereview/<?=$product['product_id']?>" method="post">
         <div class="row">
             <div class="col-sm-4">
                 <div class="form-floating">

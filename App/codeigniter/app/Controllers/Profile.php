@@ -84,7 +84,7 @@ class Profile extends BaseController
                         'user_name' => $user['user_name']
                     ];
                     $session->set($sessiondata);
-                    return redirect()->to(base_url('profile'));
+                    return redirect()->to(base_url('/Profile'));
                 } else {
                     $data['passworderror'] = true;
                 }

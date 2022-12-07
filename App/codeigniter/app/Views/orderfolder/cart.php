@@ -5,7 +5,7 @@
 <main class="container">
     <?php if(isset($emptycart)): ?>
         <div>
-            <h2>cart</h2>
+            <h2>Cart</h2>
             <h3>Your cart is empty</h3>
         </div>
     <?php else:?>
@@ -14,30 +14,31 @@
     <div class = "row">
         <div class="col-sm-8">
             <h2>Cart</h2>
-            <?php foreach ($products as $product): ?>
+            <?php $i = 0; foreach ($products as $product):
+                $i++;?>
                 <div class="card" style="margin-bottom: 10px;">
                     <div class="card-body">
                         <div class="row">
 
                             <div class="col-md-4">
-                                <h3><a href="#" class = "link-dark"><?= $product['product_title']?></a></h3>
+                                <h3><a href="/Product/productpage/<?= $product['product_id']?>" class = "link-dark"><?= $product['product_title']?></a></h3>
                                 <div>
                                     <h6><?=$product['product_amount']?> items left!</h6>
                                 </div>
-                                <a href="/cart/removeproduct/<?=$product['itemrow']['cart_item_id']?>" class="btn btn-danger">Remove product</a>
+                                <a href="/Cart/removeproduct/<?=$product['itemrow']['cart_item_id']?>" class="btn btn-danger">Remove product</a>
                             </div>
 
                             <div class="col-md-5">
-                                <form action="Cart/editline/<?=$product['itemrow']['cart_item_id']?>" method="post">
+                                <form action="Cart/editline/<?=$product['itemrow']['cart_item_id']?>" method="post" id="postForm">
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="form-floating">
-                                                <input type="number" id="productAmount" name="product_amount" class="form-control" value = "<?= set_value('product_amount', $product['itemrow']['product_amount'])?>">
+                                                <input type="number" id="productAmount<?=$i?>" name="product_amount" class="form-control" value = "<?= set_value('product_amount', $product['itemrow']['product_amount'])?>">
                                                 <label for="productAmount">Amount</label>
                                             </div> 
                                         </div>
                                         <div class="col-6">
-                                            <button class="btn btn-primary" type="submit" style="padding: 15px;">Change</button>
+                                            <button class="btn btn-primary" type="submit" style="padding: 15px;" id="changebutton<?=$i?>">Change</button>
                                         </div>
                                     </div>
                                 </form>
@@ -60,11 +61,66 @@
         <div class = "col-sm-4 text-center">
             <h4>Pricing</h4>
             <h5>total: €<?= $price?></h5>
-            <a href="/checkout" class = "btn btn-primary text-center"> Checkout </a>
+            <a href="/Checkout" class = "btn btn-primary text-center" onclick=""> Checkout </a>
         </div>
     </div>
     <?php endif;?>
 </main>
 
+<?php if(!isset($emptycart)): ?>
+<script>
+    var item_amount = <?=$i?>;
+    document.getElementById('postForm').addEventListener('submit', prevent);
+   
+    
+    for(i = 1; i < item_amount+1; i++){
+        var id = 'changebutton' + i;
+        document.getElementById(id).style.visibility = 'hidden';
+    }
 
+    var elementcollection = new Array();
+    for(i = 1; i < item_amount+1; i++){
+        var id = 'productAmount' + i;
+        elementcollection.push(document.getElementById(id));
+    }
+    console.log(elementcollection)
+
+    elementcollection.forEach(function(elem){
+        elem.addEventListener('input', function(){
+            doChange(elem);
+        });
+    });
+
+
+    function prevent(e){
+        e.preventDefault();
+    }
+
+
+    function doChange(elem){
+        var element_id = elem.id;
+
+        var index = element_id.slice(13);
+        console.log(index);
+
+        var input = elem.value;
+        var params = "number="+input;
+
+        var url = "<?=base_url("/Cart/ajaxtest")?>/" + index
+
+        fetch(url, {
+            method: "post",
+            headers: {
+            "Content-Type": "application/json",
+            "X-Requested-With": "XMLHttpRequest"
+            },
+            body: JSON.stringify({
+                number: input
+            })
+        }).then(response => {
+            console.log(response.json())
+        })
+    }
+</script>
+<?php endif;?>
 <?= $this->endSection('content')?>

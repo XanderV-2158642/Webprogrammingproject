@@ -9,7 +9,7 @@
             <?= $validation->listErrors() ?>
         </div>
     <?php endif ; ?>
-    <form action="/messages/writemessage/<?=$receiver['user_id']?>" method="post">
+    <form action="/Messages/writemessage/<?=$receiver['user_id']?>" method="post">
         <div class="row">
             <div class="col-sm-4">
                 <button class="btn btn-primary" type="submit" style="margin: 10px;">Send</button>

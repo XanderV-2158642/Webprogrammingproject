@@ -3,27 +3,44 @@
 namespace App\Controllers;
 
 use App\Models\CartModel;
+use App\Models\NotifyRequestModel;
+use App\Models\NotificationModel;
 use App\Models\ProductModel;
 use App\Models\ProductpicModel;
+use App\Models\ReviewModel;
+use App\Models\UserModel;
 use CodeIgniter\Validation\Rules;
 use Config\Validation;
 
 class Product extends BaseController {
     public function index()
     {
-        redirect()->to('/shop');
+        redirect()->to('/Shop');
     }
 
     public function productpage($id){
+        $usertable = new UserModel();
+
         $producttable = new ProductModel();
         $product = $producttable->find($id);
 
         $picturetable = new ProductpicModel();
         $pictures = $picturetable->where('product_id', $id)->findAll();
 
+        $reviewtable = new ReviewModel();
+        $revs = $reviewtable->where('product_id', $id)->findAll();
+
+        $reviews = [];
+        foreach($revs as $review){
+            $user = $usertable->find($review['writer_id']);
+            $review['user'] = $user;
+            array_push($reviews, $review);
+        }
+
+
         $data['product'] = $product;
         $data['pictures'] = $pictures;
-        $data['reviews'] = [];
+        $data['reviews'] = $reviews;
         $data['packaging'] = [
             'wood' => 'per package',
             'gas' => 'per canister',
@@ -63,7 +80,7 @@ class Product extends BaseController {
                 $files = $this->request->getFileMultiple('product_picture');
 
                 $this->insertdata($newdata, $files);
-                return redirect()->to(base_url('/profile'));
+                return redirect()->to(base_url('/Profile'));
             }
         }
         return view('/productcreatefolder/createwd', $data);
@@ -98,7 +115,7 @@ class Product extends BaseController {
                     $files = $this->request->getFileMultiple('product_picture');
                     $this->updateprod($productedit, $files, $productid);
 
-                    header('Refresh:0');
+                    return redirect()->to(base_url('/Profile'));
                 }
             }
 
@@ -134,7 +151,7 @@ class Product extends BaseController {
 
                 $this->insertdata($newdata, $files);
                
-                return redirect()->to('/profile');
+                return redirect()->to('/Profile');
             }
         }
 
@@ -166,7 +183,7 @@ class Product extends BaseController {
 
                 $this->insertdata($newdata, $files);
                
-                return redirect()->to('/profile');
+                return redirect()->to('/Profile');
             }
         }
 
@@ -195,7 +212,7 @@ class Product extends BaseController {
 
                 $this->insertdata($newdata, $files);
                
-                return redirect()->to('/profile');
+                return redirect()->to('/Profile');
             }
         }
         return view('/productcreatefolder/createelec', $data);
@@ -242,8 +259,23 @@ class Product extends BaseController {
         if (!empty($files)){
             $this->insertfiles($files, $productid);
         }
-        header('Refresh:0');
 
+        if ($updatedata['product_amount']>0){
+            $this->transferNotifications($productid);
+        }
+    }
+
+    private function transferNotifications($product_id){
+        $nreqtable = new NotifyRequestModel();
+        $rtable = new NotificationModel();
+
+        $reqs = $nreqtable->where('product_id', $product_id)->findAll();
+        foreach ($reqs as $r){
+            $r['beenread'] = 0;
+            $nreqtable->delete($r['notification_id']);
+            unset($r['notification_id']);
+            $rtable->insert($r);
+        }
     }
 
     private function createrules(){

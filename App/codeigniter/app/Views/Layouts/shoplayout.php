@@ -28,12 +28,12 @@
     <!-- NAVBAR -->
     <div style = "margin-bottom: 20px;">
         <nav class= "navbar navbar-expand-lg" style = "background-color: #EEEEEE;">
-            <a class="navbar-brand" href="/shop">Products</a>
+            <a class="navbar-brand" href="/Shop">Products</a>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link" aria-current="page" href="/shop/wood">Wood</a></li>
-                <li class="nav-item"><a class="nav-link" aria-current="page" href="/shop/oil">Oil</a></li>
-                <li class="nav-item"><a class="nav-link" aria-current="page" href="/shop/gas">Gas</a></li>
-                <li class="nav-item"><a class="nav-link" aria-current="page" href="/shop/electricity">Electricity</a></li>
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="/Shop/wood">Wood</a></li>
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="/Shop/oil">Oil</a></li>
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="/Shop/gas">Gas</a></li>
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="/Shop/electricity">Electricity</a></li>
             </ul>
             <span class="navbar-text">Pick the product you are searching for</span>
         </nav>
