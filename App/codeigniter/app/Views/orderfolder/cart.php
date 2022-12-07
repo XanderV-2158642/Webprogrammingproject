@@ -41,6 +41,9 @@
                                             <button class="btn btn-primary" type="submit" style="padding: 15px;" id="changebutton<?=$i?>">Change</button>
                                         </div>
                                     </div>
+                                    <div>
+                                        <p id = "message<?=$i?>"></p>
+                                    </div>
                                 </form>
                             </div>
                             <div class="col-md-3">
@@ -60,7 +63,7 @@
 
         <div class = "col-sm-4 text-center">
             <h4>Pricing</h4>
-            <h5>total: €<?= $price?></h5>
+            <h5 id="Totalprice">total: €<?= $price?></h5>
             <a href="/Checkout" class = "btn btn-primary text-center" onclick=""> Checkout </a>
         </div>
     </div>
@@ -118,9 +121,33 @@
                 number: input
             })
         }).then(response => {
-            console.log(response.json())
+            return response.json();
+        }).then((data) => {
+            id = "message" + data.num
+            document.getElementById(id).innerText = data.message;
+            elem.value = data.newval;
+            changePrice();
         })
     }
+
+    function changePrice(){
+        var url = "<?=base_url('/Cart/getTotalprice')?>";
+        fetch(url, {
+            method: "get",
+            headers: {
+            "Content-Type": "application/json",
+            "X-Requested-With": "XMLHttpRequest"
+            }
+        }).then(response => {
+            return response.json();
+        }).then(data => {
+            console.log(data);
+            var price = data.price;
+            var rounded = price.toFixed(2);
+            document.getElementById('Totalprice').innerText = "total: €" + rounded;
+        })
+    }
+
 </script>
 <?php endif;?>
 <?= $this->endSection('content')?>

@@ -80,6 +80,7 @@ $routes->group( 'Cart', ['filter' => 'auth'], static function ($routes) {
     $routes->get('removeproduct/(:num)', 'Cart::removeproduct/$1');
     $routes->post('ajaxtest/(:num)', 'Cart::ajaxtest/$1');
     $routes->get('ajaxtest/(:num)', 'Cart::ajaxtest/$1');
+    $routes->get('getTotalprice', 'Cart::getTotalprice');
 });
 
 $routes->group('Checkout', ['filter' => 'auth'], static function ($routes) {

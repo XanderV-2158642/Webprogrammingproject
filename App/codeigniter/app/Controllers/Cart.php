@@ -125,7 +125,16 @@ class Cart extends BaseController
 
             $message = $this->updateline($data_array['cart_item'], $data_array['item_amount']);
 
-            $jsonelement = json_encode($message, JSON_PRETTY_PRINT);
+            $cartitems = $carttable->where('user_id', $user_id)->findAll();
+            $cartitem = $cartitems[$inputnumber-1]; 
+
+            $data = [
+                'message' => $message,
+                'num' => $inputnumber,
+                'newval' => $cartitem['product_amount']
+            ];
+
+            $jsonelement = json_encode($data, JSON_PRETTY_PRINT);
 
             $response = service('response');
             $response->setStatusCode(Response::HTTP_OK);
@@ -170,5 +179,33 @@ class Cart extends BaseController
             $carttable->delete($cart_item_id);
         }
         return redirect()->to(base_url('/Cart'));
+    }
+
+    public function getTotalprice(){
+        $user_id = session()->get('user_id');
+
+        $carttable = new CartModel();
+        $cartitems = $carttable->where('user_id', $user_id)->findAll();
+
+        $producttable = new ProductModel();
+        $totalprice = 0;
+        foreach ($cartitems as $item){
+            $product = $producttable->find($item['product_id']);
+            $val = $product['product_price'] * $item['product_amount'];
+            $totalprice += round($val, 2);
+        }
+
+        $data = [
+            'price' => $totalprice
+        ];
+
+        $json = json_encode($data, JSON_PRETTY_PRINT);
+
+        $response = service('response');
+        $response->setStatusCode(Response::HTTP_OK);
+        $response->setBody($json);
+        $response->setHeader('Content-type', 'text/html');
+        $response->send();
+        return;
     }
 }
