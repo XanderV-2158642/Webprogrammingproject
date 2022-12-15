@@ -2,7 +2,7 @@
 
 <?= $this->section('content') ?>
 
-<main class="container">
+<main class="container-xv">
     <div class="">
     <h2>Add an oil product</h2>
         <?php if(isset($validation)) : ?>
@@ -10,7 +10,14 @@
                 <?= $validation->listErrors() ?>
             </div>
         <?php endif ; ?>
-        <form action="/Product/createoil" class = "w-75" method="post" enctype="multipart/form-data">
+
+        <?php if(isset($nopicture)) : ?>
+            <div class="alert alert-danger text-center">
+                <p>please upload a picture<p>
+            </div>
+        <?php endif ; ?>
+
+        <form action="/Product/createoil" class = "w-75 bot-space-xv" method="post" enctype="multipart/form-data" id="form">
             <div class="row mb-3">
                 <label for="producttitle" class="col-sm-3 col-form-label">Title</label>
                 <div class = "col-sm-9">
@@ -20,7 +27,8 @@
 
             <div class="row mb-3">
                 <div class="col-sm-3 col-form-label">
-                    <label for="productprice" >Price&nbsp;</label><small class="text-black-50">per package</small>
+                    <label for="productprice" >Price&nbsp;</label>
+                    <small class="text-black-50">per package</small>
                 </div>
                 <div class = "col-sm-9">
                     <input type="number" name ="product_price" class="form-control" id = "productprice" step=".01">
@@ -36,7 +44,7 @@
 
             <div class="row mb-3">
                 <div class="col-sm-3 col-form-label">
-                    <label for="" >Package size&nbsp;</label>
+                    <label for="productsize" >Package size&nbsp;</label>
                     <small class="text-black-50">in Liters</small>
                 </div>
                 <div class = "col-sm-9">
@@ -58,16 +66,16 @@
                 <legend class ="col-form-label col-sm-3">Sort</legend>
                 <div class = "col-sm-9">
                     <div class ="form-check">
-                        <input type="radio" name="product_sort" value="petroluem" id="synthetic" class="form-check-input">
-                        <label for="" class="form-check-label">Petroluem</label>
+                        <input type="radio" name="product_sort" value="petroluem" id="petroluem" class="form-check-input">
+                        <label for="petroleum" class="form-check-label">Petroluem</label>
                     </div>
                     <div class ="form-check">
                         <input type="radio" name="product_sort" value="synthetic" id="synthetic" class="form-check-input">
-                        <label for="" class="form-check-label">Synthetic</label>
+                        <label for="synthetic" class="form-check-label">Synthetic</label>
                     </div>
                     <div class ="form-check">
                         <input type="radio" name="product_sort" value="other" id="other" class="form-check-input" checked>
-                        <label for="" class="form-check-label">Other</label>
+                        <label for="other" class="form-check-label">Other</label>
                     </div>
                 </div>
             </fieldset>
@@ -80,15 +88,17 @@
             </div>
 
             <div class = "row mb-3">
-                <label for="" class="col-form-label col-sm-3" >Upload product picture(s)</label>
+                <label for="image" class="col-form-label col-sm-3" >Pictures (and video)</label>
                 <div class="col-sm-9">
                     <input type="file" multiple name="product_picture[]" class = "form-control" id="image">
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="submit" class="btn btn-db-xv">Create</button>
         </form>
     </div>
 </main>
+
+<script src="<?= base_url('/JS/createproduct.js')?>"></script>
 
 <?= $this->endSection('content') ?>

@@ -169,7 +169,7 @@ class Profile extends BaseController
     public function edit(){
         helper(['form']);
         $data = [
-            'stylesheets' => ['/CSS/profile.css']
+            'stylesheets' => ['/CSS/profile.css', '/CSS/products.css']
         ];
         
         if($this->request->getMethod() === 'post'){

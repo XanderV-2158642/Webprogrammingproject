@@ -30,7 +30,10 @@ class Shop extends BaseController
         $data = [
             'products' => [],
             'pagenr' => $pagenr,
-            'lastpage' => $lastpage
+            'lastpage' => $lastpage,
+            'stylesheets' => [
+                '/CSS/shopsstyling.css'
+            ]
         ];
 
         foreach($products as $product){
@@ -114,7 +117,10 @@ class Shop extends BaseController
                 'maxprice' => $maxprice,
                 'sorts' => $sorts
             ],
-            'filteruri' => $filteruri
+            'filteruri' => $filteruri,
+            'stylesheets' => [
+                '/CSS/shopsstyling.css'
+            ]
         ];
 
         $query = $db->query($querystring);
@@ -188,7 +194,10 @@ class Shop extends BaseController
                 'maxprice' => $maxprice,
                 'sorts' => $sorts
             ],
-            'filteruri' => $filteruri
+            'filteruri' => $filteruri,
+            'stylesheets' => [
+                '/CSS/shopsstyling.css'
+            ]
         ];
 
         $query = $db->query($querystring);
@@ -257,7 +266,10 @@ class Shop extends BaseController
                 'maxprice' => $maxprice,
                 'sorts' => $sorts
             ],
-            'filteruri' => $filteruri
+            'filteruri' => $filteruri,
+            'stylesheets' => [
+                '/CSS/shopsstyling.css'
+            ]
         ];
 
         $query = $db->query($querystring);
@@ -326,7 +338,10 @@ class Shop extends BaseController
                 'maxprice' => $maxprice,
                 'sorts' => $sorts
             ],
-            'filteruri' => $filteruri
+            'filteruri' => $filteruri,
+            'stylesheets' => [
+                '/CSS/shopsstyling.css'
+            ]
         ];
 
         $query = $db->query($querystring);

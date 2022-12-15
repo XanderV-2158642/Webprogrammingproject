@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 
 
-<main class="container text-center">
+<main class="container-xv text-center">
     <div class = "m-auto" style="max-width: 330px; padding: 15px;">
         <?php  if(isset($succes)): ?>
             <div class = "alert alert-success" role = "alert">
@@ -25,18 +25,18 @@
             <h2>Sign in</h2>
             <div class="form-floating">
                 <input type="email" name = "user_email" id= "email" class = "form-control">
-                <label for="">Email Address</label>
+                <label for="email">Email Address</label>
             </div>
             <div class="form-floating" style =" margin-bottom: 10px;">
                 <input type="password" name = "user_password" id="password" class = "form-control">
-                <label for="">Password</label>
+                <label for="password">Password</label>
             </div>
-            <button type="submit" class = "btn btn-lg btn-primary">Sign in</button>
+            <button type="submit" class = "btn btn-db-xv">Sign in</button>
         </form>
     </div>
     <div>
         <h3>No profile yet?</h3>
-        <a href="/Profile/createprofile" class = "btn btn-primary">Create Profile</a>
+        <a href="/Profile/createprofile" class = "btn btn-db-xv">Create Profile</a>
     </div>
 </main>
 

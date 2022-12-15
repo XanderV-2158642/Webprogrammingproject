@@ -3,10 +3,10 @@
 <?= $this->section('content') ?>
 
 
-<main class="container">
+<main class="container-xv">
 
-    <div style="margin-left: auto; margin-right: 0; width: fit-content; margin-bottom: 10px;">
-        <a href="/Notifications" class = "btn btn-primary position-relative">Notifications
+    <div class="notification-xv">
+        <a href="/Notifications" class = "btn btn-db-xv position-relative">Notifications
             <?php if ($na > 0): ?>
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                 <?=$na?>
@@ -15,33 +15,25 @@
             <?php endif;?>
         </a>
     </div>
-    <h2 style = "text-align: center">Welcome to the Energyshop</h2>
+    <h2 class="page-title-xv">Welcome to the Energyshop</h2>
 
     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. At magni similique eligendi ipsam qui, accusamus, iure temporibus natus illo odit, harum aut sequi blanditiis reprehenderit consequatur culpa voluptates! Illo, nihil.</p>
 
-    <div class = "row">
-            <div class = "card w-75 mx-auto" style = "margin-bottom: 10px;">
-                <div class = "card-body">
-                    <h4>Shop</h4>
-                    <p class= "card-text"></p>
-                    <a href="/Shop" class = " btn btn-primary">Go to Shop</a>
-                </div>
-            </div>
-            <div class = "card w-75 mx-auto" style = "margin-bottom: 10px;">
-                <div class = "card-body">
-                    <h4>User profile</h4>
-                    <p class= "card-text"></p>
-                    <a href="/Profile" class = " btn btn-primary">Go to your profile</a>
-                </div>
-            </div>
-            <div class = "card w-75 mx-auto" style = "margin-bottom: 10px;">
-                <div class = "card-body">
-                    <h4>About us</h4>
-                    <p class= "card-text"></p>
-                    <a href="#" class = " btn btn-primary">Go to About us</a>
-                </div>
-            </div>
+    <div class = "card w-75 card-xv" >
+        <div class = "card-body">
+            <h4>Shop</h4>
+            <p class= "card-text"></p>
+            <a href="/Shop" class="btn btn-db-xv">Go to Shop</a>
         </div>
+    </div>
+    <div class = "card w-75 card-xv">
+        <div class = "card-body">
+            <h4>User profile</h4>
+            <p class= "card-text"></p>
+            <a href="/Profile" class="btn btn-db-xv">Go to your profile</a>
+        </div>
+    </div>
+
 </main>
 
 

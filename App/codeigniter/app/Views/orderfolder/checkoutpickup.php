@@ -2,30 +2,30 @@
 
 <?= $this->section('content') ?>
 
-<main class="container">
+<main class="container-xv">
     <h2>Pickup</h2>
     <div class="row">
-        <div class="col-sm-6" style="margin-bottom: 10px;">
+        <div class="col-sm-6 form-xv">
             <?php if(isset($validation)) : ?>
                 <div class="alert alert-danger text-center">
                     <?= $validation->listErrors() ?>
                 </div>
             <?php endif ; ?>
             <form action="/Checkout/pickup" method="post">
-                <div class="form-floating">
-                    <input class="form-control" type="date" name="date" id="date">
+                <div class="form-floating inputfield-xv">
+                    <input class="form-control" type="date" name="date" id="date" required>
                     <label for="date">Date</label>
                 </div>
-                <div class="form-floating">
-                    <input class="form-control" type="time" name="time" id="time">
+                <div class="form-floating inputfield-xv">
+                    <input class="form-control inputfield-xv" type="time" name="time" id="time" required>
                     <label for="time">Time</label>
                 </div>
-                <button class="btn btn-primary" type="submit">Order</button>
+                <button class="btn btn-db-xv" type="submit">Order</button>
             </form>
         </div>
         <div class="col-sm-6">
             <?php foreach ($products as $product):?>
-                <div class="card" style="margin-bottom: 10px;">
+                <div class="card card-xv">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-6">

@@ -2,10 +2,10 @@
 
 <?= $this->section('content') ?>
 
-<main class="container text-center">
-    <div class = "m-auto" style="max-width: 400px; padding: 15px;">
+<main class="container-xv text-center">
+    <div class = "form-layout-xv m-auto">
         <?php if(isset($validation)) : ?>
-            <div class="text-danger">
+            <div class="alert alert-danger text-center">
                 <?= $validation->listErrors() ?>
             </div>
         <?php endif ; ?>
@@ -13,33 +13,33 @@
             <h2>Fill in the form to create an account</h2>
             <div class="form-floating">
                 <input type="text" name="user_name" class = "form-control" id="username">
-                <label >Full Name</label>
+                <label for="username" >Full Name</label>
             </div>
             <div class = "form-floating">
                 <textarea class="form-control" name="user_description" id = "description"></textarea>
-                <label for="">Description</label>
+                <label for="description">Description</label>
             </div>
             <div class="form-floating">
                 <input type="text"  name="user_phone" class="form-control" id="phone">
-                <label for="">Phone Number</label>               
+                <label for="phone">Phone Number</label>               
             </div>
             <div class="form-floating">
                 <input type="email" name = "user_email" class = "form-control" id="email">
-                <label for="">Email Address</label>
+                <label for="email">Email Address</label>
             </div>
             <div class = "mb-3">
                 <input type="file" multiple name="user_picture[]" class = "form-control" id="image">
-                <label for="" style= " text-align: right;">Upload profile picture(s)</label>
+                <label for="image" style= " text-align: right;">Upload profile picture(s)</label>
             </div>
             <div class="form-floating">
                 <input type="password" name = "user_password"class = "form-control" id="password">
-                <label for="">Password</label>
+                <label for="passwword">Password</label>
             </div>
-            <div class="form-floating" style =" margin-bottom: 10px;">
+            <div class="form-floating">
                 <input type="password" name = "confirmpassword"class = "form-control" id="password2">
-                <label for="">Confirm password</label>
+                <label for="password2">Confirm password</label>
             </div>
-            <button type="submit" class = "btn btn-lg btn-primary">Create account</button>
+            <button type="submit" class = "btn btn-db-xv">Create account</button>
         </form>
     </div>
 </main>

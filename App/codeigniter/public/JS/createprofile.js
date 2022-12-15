@@ -5,7 +5,7 @@ const phone = document.getElementById('phone');
 const email = document.getElementById('email');
 const password = document.getElementById('password');
 const password2 = document.getElementById('password2');
-const image = document.getElementById('image');
+const images = document.getElementById('image');
 
 form.addEventListener('submit', (listener) => {
     listener.preventDefault();
@@ -21,7 +21,6 @@ function checkInputs(){
     const emailvalue = email.value;
     const passwordvalue = password.value;
     const password2value = password2.value;
-    const imagevalue = image.value;
 
     let correct = true;
 
@@ -74,12 +73,12 @@ function checkInputs(){
 
     setValid(description, "Description");
 
-    if (image.files.length == 0){
-        setValidImage(image, "Okay");
-    } else if(isImage(imagevalue)){
-        setValidImage(image), "Okay";
+    if (images.files.length ==0){
+        setValidImage(images)
+    } else if(isImages(images)){
+        setValidImage(images)
     }else{
-        setErrorImage(image, "Upload a image with a jpg extension");
+        setErrorImage(images);
         correct = false;
     }
 
@@ -140,9 +139,15 @@ function isEmail(emailAdress){
     return false; 
 }
 
-function getExtension(file){
-    var parts = file.split('.');
-    return parts[parts.length - 1];
+function isImages(input){
+    for (var index = 0; index < input.files.length; index++) {
+        var imgname = input.files[index].name;
+        console.log(imgname);
+        if (!isImage(imgname)){
+            return false
+        }        
+    }
+    return true;
 }
 
 function isImage(file){
@@ -153,4 +158,9 @@ function isImage(file){
     else{
         return false;
     }
+}
+
+function getExtension(file){
+    var parts = file.split('.');
+    return parts[parts.length - 1];
 }

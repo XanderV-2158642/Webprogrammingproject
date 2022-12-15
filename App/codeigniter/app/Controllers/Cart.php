@@ -31,7 +31,10 @@ class Cart extends BaseController
 
         $data = [
             'products' => $products, 
-            'price' => $totalprice
+            'price' => $totalprice,
+            'stylesheets' => [
+                '/CSS/orders.css'
+            ]
         ];
 
         if (empty($cartitems)){

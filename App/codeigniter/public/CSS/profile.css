@@ -47,3 +47,8 @@
 .mb-3.valid > label{
     color: #0e9e4a;;
 }
+
+.form-layout-xv{
+    max-width: 400px; 
+    padding: 15px;
+}

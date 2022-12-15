@@ -7,6 +7,7 @@ use App\Models\NotifyRequestModel;
 use App\Models\NotificationModel;
 use App\Models\ProductModel;
 use App\Models\ProductpicModel;
+use App\Models\ProductVideoModel;
 use App\Models\ReviewModel;
 use App\Models\UserModel;
 use CodeIgniter\Validation\Rules;
@@ -37,9 +38,17 @@ class Product extends BaseController {
             array_push($reviews, $review);
         }
 
+        $vids = new ProductVideoModel();
+        $video = $vids->where('product_id', $id)->first();
+
 
         $data['product'] = $product;
         $data['pictures'] = $pictures;
+
+        if(!empty($video)){
+            $data['video'] = $video;
+        }
+
         $data['reviews'] = $reviews;
         $data['packaging'] = [
             'wood' => 'per package',
@@ -62,7 +71,11 @@ class Product extends BaseController {
     public function createwood(){
         helper(['form']);
         $session = session();
-        $data = [];
+        $data = [
+            'stylesheets'=>[
+                '/CSS/products.css'
+            ]
+        ];
 
         if ($this->request->getMethod() === 'post'){
             $rules = $this->createrules();
@@ -78,6 +91,10 @@ class Product extends BaseController {
                 $newdata['user_id'] = $session->get('user_id');
                 $newdata['product_type'] = 'wood';
                 $files = $this->request->getFileMultiple('product_picture');
+                if(!$this->haspicture($files)){
+                    $data['nopicture'] = true;
+                    return view('/productcreatefolder/createwd', $data);
+                }
 
                 $this->insertdata($newdata, $files);
                 return redirect()->to(base_url('/Profile'));
@@ -93,7 +110,11 @@ class Product extends BaseController {
 
         $session = session();
 
-        $data = [];
+        $data = [
+            'stylesheets'=>[
+                '/CSS/products.css'
+            ]
+        ];
 
         if ($session->get('user_id') === $product['user_id']){
             $data['product'] = $product;
@@ -102,6 +123,12 @@ class Product extends BaseController {
             $productpictures = new ProductpicModel();
             $pictures = $productpictures->where('product_id', $productid)->findAll();
             $data['pictures'] = $pictures;
+
+            $vids = new ProductVideoModel();
+            $video = $vids->where('product_id', $productid)->first();
+            if(!empty($video)){
+                $data['video'] = $video;
+            }
 
             if ($this->request->getMethod() === 'post'){
                 $rules = $this->editrules();
@@ -132,7 +159,11 @@ class Product extends BaseController {
     {
         helper(['form']);
         $session = session();
-        $data = [];
+        $data = [
+            'stylesheets'=>[
+                '/CSS/products.css'
+            ]
+        ];
 
         if ($this->request->getMethod() === 'post'){
             $rules = $this->createrules();
@@ -148,6 +179,10 @@ class Product extends BaseController {
                 $newdata['user_id'] = $session->get('user_id');
                 $newdata['product_type'] = 'oil';
                 $files = $this->request->getFileMultiple('product_picture');
+                if(!$this->haspicture($files)){
+                    $data['nopicture'] = true;
+                    return view('/productcreatefolder/createoil', $data);
+                }
 
                 $this->insertdata($newdata, $files);
                
@@ -163,7 +198,11 @@ class Product extends BaseController {
 
         helper(['form']);
         $session = session();
-        $data = [];
+        $data = [
+            'stylesheets'=>[
+                '/CSS/products.css'
+            ]
+        ];
 
         if ($this->request->getMethod() === 'post'){
             $rules = $this->createrules();
@@ -180,6 +219,10 @@ class Product extends BaseController {
                 $newdata['product_type'] = 'gas';
                 
                 $files = $this->request->getFileMultiple('product_picture');
+                if(!$this->haspicture($files)){
+                    $data['nopicture'] = true;
+                    return view('/productcreatefolder/creategas', $data);
+                }
 
                 $this->insertdata($newdata, $files);
                
@@ -195,7 +238,11 @@ class Product extends BaseController {
 
         helper(['form']);
         $session = session();
-        $data = [];
+        $data = [
+            'stylesheets'=>[
+                '/CSS/products.css'
+            ]
+        ];
 
         if ($this->request->getMethod() === 'post'){
             $rules = $this->createrules();
@@ -209,6 +256,10 @@ class Product extends BaseController {
                 $newdata['product_size'] = 1;
                 $newdata['product_type'] = 'electricity';
                 $files = $this->request->getFileMultiple('product_picture');
+                if(!$this->haspicture($files)){
+                    $data['nopicture'] = true;
+                    return view('/productcreatefolder/createelec', $data);
+                }
 
                 $this->insertdata($newdata, $files);
                
@@ -220,15 +271,27 @@ class Product extends BaseController {
 
 
     private function insertfiles($files, $productid){
+        $vids = new ProductVideoModel();
+        $pics = new ProductpicModel();
         foreach ($files as $file){
             if ($file->isValid() && ! $file->hasMoved()){
-                $file->move('./Images/Product');
-                $pics = new ProductpicModel();
-                $picdata = [
-                    'picture_name' => $file->getName(),
-                    'product_id' => $productid
-                ];
-                $pics->insert($picdata);
+                if ($file->guessExtension()=='mp4'){
+                    if (!$this->hasvid($productid)){
+                        $file->move('./Videos/Product');
+                        $viddata = [
+                            'video_name' => $file->getName(),
+                            'product_id' => $productid
+                        ];
+                        $vids->insert($viddata);
+                    }
+                } elseif ($file->getExtension() == 'jpg') {
+                    $file->move('./Images/Product');   
+                    $picdata = [
+                        'picture_name' => $file->getName(),
+                        'product_id' => $productid
+                    ];
+                    $pics->insert($picdata);
+                }
             }
         }
     }
@@ -237,17 +300,44 @@ class Product extends BaseController {
         $products = new ProductModel();
         $productid = $products->insert($newdata);
 
+        $pics = new ProductpicModel();
+        $vids = new ProductVideoModel();
         foreach ($files as $file){
-            if ($file->isValid() && ! $file->hasMoved()){
-                $file->move('./Images/Product');
-                $pics = new ProductpicModel();
-                $picdata = [
-                    'picture_name' => $file->getName(),
-                    'product_id' => $productid
-                ];
-                $pics->insert($picdata);
+            if ($file->isValid() && !$file->hasMoved()){
+                if ($file->guessExtension()=='mp4'){
+                    if (!$this->hasvid($productid)){
+                        $file->move('./Videos/Product');
+                        $viddata = [
+                            'video_name' => $file->getName(),
+                            'product_id' => $productid
+                        ];
+                        $vids->insert($viddata);
+                    }
+                } elseif ($file->getExtension() == 'jpg') {
+                    $file->move('./Images/Product');
+                    $picdata = [
+                        'picture_name' => $file->getName(),
+                        'product_id' => $productid
+                    ];
+                    $pics->insert($picdata);
+                }
             }
         }
+    }
+
+    private function hasvid($product_id){
+        $vids = new ProductVideoModel();
+        $productvid = $vids->where('product_id', $product_id)->findAll();
+        return !empty($productvid);
+    }
+
+    private function haspicture($files){
+        foreach($files as $file){
+            if ($file->guessExtension()=='jpg'){
+                return true;
+            }
+        }
+        return false;
     }
 
     private function updateprod($updatedata, $files, $productid ){
@@ -305,8 +395,8 @@ class Product extends BaseController {
                 'label' => 'Description'
             ],
             'product_picture' => [
-                'rules' => 'uploaded[product_picture]|max_size[product_picture, 1024]|is_image[product_picture]',
-                'label' => 'Picture'
+                'rules' => 'uploaded[product_picture]|max_size[product_picture, 10000]|ext_in[product_picture,jpg,mp4]',
+                'label' => 'Picture or Video'
             ]
         ];
         return $rules;
@@ -316,8 +406,8 @@ class Product extends BaseController {
         $rules = $this->createrules();
         unset($rules['product_picture']);
         $rules['product_picture'] = [
-            'rules' => 'max_size[product_picture, 1024]|is_image[product_picture]',
-            'label' => 'Picture'
+            'rules' => 'max_size[product_picture, 10000]|ext_in[product_picture,jpg,mp4]',
+            'label' => 'Picture or Video'
         ];
 
         return $rules;
@@ -363,9 +453,38 @@ class Product extends BaseController {
                 $this->removepic($pic['picture_id']);
             }
 
+            $videotable = new ProductVideoModel();
+            $vids = $videotable->where('product_id', $product_id)->findAll();
+            foreach ($vids as $vid) {
+                $this->removevid($vid['video_id']);
+            }
+
             $producttable->delete($product_id);
             return redirect()->back();
         }
+    }
+
+    public function removevid($video_id){
+
+        $videotable = new ProductVideoModel();
+        $producttable = new ProductModel();
+
+        $vid = $videotable->find($video_id);
+        $product = $producttable->find($vid['product_id']);
+
+        $user_id = session()->get('user_id');
+
+        if ($user_id === $product['user_id']){
+            $vidpath = './Videos/Product/'.$vid['video_name'];
+
+            helper(['filesystem']);
+
+            unlink($vidpath);
+
+            $videotable->delete($video_id);
+        }
+
+        return redirect()->back();
     }
 
     private function setrulesOnType($product_type, $rules){

@@ -2,7 +2,7 @@
 
 <?= $this->section('content') ?>
 
-<main class = "container">
+<main class = "container-xv">
     <div class = "row">
         <div class = "col-sm-6">
             <div id="carouselExampleControls" class="carousel slide" data-mdb-ride="carousel" data-mdb-interval="false">
@@ -10,8 +10,8 @@
                     <?php 
                     $first = true;
                     foreach($pictures as $picture): ?>
-                        <div class="carousel-item <?=($first? "active" : "")?>" data-mdb-interval="false" style="background-color: #EEEEEE;">
-                            <img src=<?=base_url("/Images/Product")."/".$picture['picture_name']?> alt="Image of product" style="max-width: 600px; max-height: 300px; width:100%; height:100%; object-fit: contain;">
+                        <div class="carousel-item <?=($first? "active" : "")?> text-center" data-mdb-interval="false" style="background-color: #EEEEEE;">
+                            <img src="<?=base_url("/Images/Product")."/".$picture['picture_name']?>" alt="Image of product" class="img-fluid" style="width: 600px; height: 300px; object-fit: contain;">
                         </div>
                     <?php $first = false; endforeach; ?>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -48,8 +48,7 @@
                         <h3 class="text-black-50" style="display: inline;"> /<?= $packaging[$product['product_type']]?></h3><br><br>
                         <h5 class="text-black-50"><?=$product['product_amount']?> items left</h5>
                     </div>
-                </div>
-                
+                </div>                
             </div>
             <div class="row">
                 <div class="col-md-6">
@@ -60,16 +59,16 @@
                             <label for="itemamount">Amount</label>
                         </div>
                         <div class="form-floating" >
-                            <button class="btn btn-primary" type="submit" style="margin: 10px">Add to cart</button>
+                            <button class="btn btn-db-xv" type="submit">Add to cart</button>
                         </div>
                     </form>
                     <?php else:?>
                         <h6>No items left, Want to receive a notification when item is back in stock?</h6>
-                        <a class="btn btn-primary" href="/notifications/addnotification/<?=$product['product_id']?>"> Notify me </a>
+                        <a class="btn btn-db-xv" href="/notifications/addnotification/<?=$product['product_id']?>"> Notify me </a>
                     <?php endif;?>
                 </div>
                 <div class="col-md-6 text-center">
-                    <a href="/Profile/profilepage/<?=$product['user_id']?>" class = "btn btn-warning" style="margin: 10px"> Go to seller profile</a>
+                    <a href="/Profile/profilepage/<?=$product['user_id']?>" class = "btn btn-ye-xv" style="margin: 10px"> Go to seller profile</a>
                     <?php if (session()->getFlashdata('succesfully_added')):?>
                         <div class="alert alert-success text-center">
                             <h6><?= session()->getFlashdata('succesfully_added')?></h6>
@@ -89,6 +88,12 @@
             </div>
         </div>
     </div>
+
+    <?php if(isset($video)):?>
+    <div id="video" class="text-center">
+        <iframe src="<?=base_url("/Videos/Product")."/".$video['video_name']?>" class="img-fluid" style="width: 100%; height: 300px; object-fit: contain;"></iframe>
+    </div>
+    <?php endif;?>
 
     <div>
         <h3>Reviews</h3>

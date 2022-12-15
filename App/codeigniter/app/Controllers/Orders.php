@@ -62,7 +62,10 @@ class Orders extends BaseController
             'placed_orders' => $placed_orders_data,
             'placed_orders_delivered' => $placed_orders_d_data,
             'unhandled_orders' =>$unhandled_data,
-            'delivered_orders' =>$delivered_data
+            'delivered_orders' =>$delivered_data,
+            'stylesheets' => [
+                '/CSS/orders.css'
+            ]
         ];
 
         return view('/orderfolder/orders', $data);

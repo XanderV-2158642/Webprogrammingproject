@@ -2,7 +2,7 @@
 
 <?= $this->section('content') ?>
 
-<main class="container">
+<main class="container-xv">
     <div class="">
     <h2>Add an electricity product</h2>
         <?php if(isset($validation)) : ?>
@@ -10,7 +10,14 @@
                 <?= $validation->listErrors() ?>
             </div>
         <?php endif ; ?>
-        <form action="/Product/createelec" class = "w-75" method="post" enctype="multipart/form-data">
+
+        <?php if(isset($nopicture)) : ?>
+            <div class="alert alert-danger text-center">
+                <p>please upload a picture<p>
+            </div>
+        <?php endif ; ?>
+
+        <form action="/Product/createelec" class = "w-75 bot-space-xv" method="post" enctype="multipart/form-data" id="form">
             <div class="row mb-3">
                 <label for="producttitle" class="col-sm-3 col-form-label">Title</label>
                 <div class = "col-sm-9">
@@ -20,7 +27,8 @@
 
             <div class="row mb-3">
                 <div class="col-sm-3 col-form-label">
-                    <label for="productprice" >Price&nbsp;</label><small class="text-black-50">per KWH</small>
+                    <label for="productprice" >Price&nbsp;</label>
+                    <small class="text-black-50">per KWH</small>
                 </div>
                 <div class = "col-sm-9">
                     <input type="number" name ="product_price" class="form-control" id = "productprice" step=".01">
@@ -52,15 +60,17 @@
             </div>
 
             <div class = "row mb-3">
-                <label for="" class="col-form-label col-sm-3" >Upload product picture(s)</label>
+                <label for="image" class="col-form-label col-sm-3" >Pictures (and video)</label>
                 <div class="col-sm-9">
                     <input type="file" multiple name="product_picture[]" class = "form-control" id="image">
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="submit" class="btn btn-db-xv">Create</button>
         </form>
     </div>
 </main>
+
+<script src="<?= base_url('/JS/createproduct.js')?>"></script>
 
 <?= $this->endSection('content') ?>

@@ -2,10 +2,10 @@
 
 <?= $this->section('content') ?>
 
-<main class="container">
+<main class="container-xv">
     <h2>Checkout</h2>
     <div class="row">
-        <div class="col-sm-6" style="margin-bottom: 10px;">
+        <div class="col-sm-6">
         <h4>Choose how you want to get your items</h4>
             <form action="/Checkout" method="post">
                 <fieldset>
@@ -18,12 +18,12 @@
                         <label class="form-check-label" for="DeliveryOrder">Delivery</label>
                     </div>
                 </fieldset>
-                <button class="btn btn-primary" type="submit">Confirm</button>
+                <button class="btn btn-db-xv" type="submit">Confirm</button>
             </form>
         </div>
         <div class="col-sm-6">
             <?php foreach ($products as $product):?>
-                <div class="card" style="margin-bottom: 10px;">
+                <div class="card card-xv">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-6">

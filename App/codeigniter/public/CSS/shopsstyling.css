@@ -1,0 +1,11 @@
+.pagination-xv{
+    --bs-pagination-active-bg: #02254b;
+    --bs-pagination-active-border-color: #02254b;
+    --bs-pagination-focus-color:#02254b;
+    --bs-pagination-hover-color:#02254b;
+    --bs-pagination-color:#02254b;
+}
+
+.filterform{
+    margin-bottom: 1rem;
+}

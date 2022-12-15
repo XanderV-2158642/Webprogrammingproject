@@ -21,7 +21,7 @@
             </div>
             <div class = "col d-flex align-items-center justify-content-center" style = "margin-bottom: 10px;">
                 <div>
-                    <h4>Heritage</h4>
+                    <h4><label for="Heritage">Heritage</label></h4>
                     <select id="Heritage" name="heritage">
                         <option value="All" <?=($form['heritage'] == 'All' ||$form['heritage'] == '')? 'selected' : ''?>>All</option>
                         <?php foreach($countries as $country) : ?>
@@ -35,14 +35,14 @@
                     <h4>Price</h4>
                     <label for="minPrice">Minimum Price</label><br>
                     <input type="number" id="minPrice" name ="min_price" value="<?= set_value('min_price', $form['minprice']) ?>"><br>
-                    <label for="minPrice">Maximum Price</label><br>
+                    <label for="maxPrice">Maximum Price</label><br>
                     <input type="number" id="maxPrice" name = "max_price" value="<?= set_value('min_price', $form['minprice']) ?>">
                 </div>
             </div>
             <div class = "col d-flex align-items-center justify-content-center" style = "margin-bottom: 10px;">
                 <div>
                     <h4>Search</h4><br>
-                    <input type="submit" value="Confirm">
+                    <input class="btn btn-db-xv" type="submit" value="Confirm">
                 </div>
             </div>
         </div>
@@ -71,7 +71,7 @@
                             <?php if ($product['product_type'] !== 'electricity'):?>
                             <h5 class="text-black-50">of <?= $product['product_size']." ".$product['unit']?></h5>
                             <?php else: echo '<br>'; endif;?>
-                            <a href="/Product/productpage/<?= $product['product_id']?>" class="btn btn-primary">Buy</a>
+                            <a href="/Product/productpage/<?= $product['product_id']?>" class="btn btn-db-xv">Buy</a>
                         </div>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
 
 
     <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
+        <ul class="pagination pagination-xv justify-content-center">
             <li class="page-item <?= $pagenr == 1 ? 'disabled' : ''?>">
                 <a class="page-link" href="/Shop/oil/<?=$pagenr-1?>/<?=$filteruri?>">Previous</a>
             </li>

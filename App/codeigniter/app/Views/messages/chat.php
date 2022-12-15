@@ -2,7 +2,7 @@
 
 <?= $this->section('content') ?>
 
-<main class="container">
+<main class="container-xv">
     <h2>Messages with <?=$corresponder['user_name']?></h2>
     <div class="w-75">
         <div class="row">
@@ -24,7 +24,7 @@
         <hr>
     </div>
     <div class="w-75 text-center">
-        <a href="/Messages/writemessage/<?=$corr_id?>" class="btn btn-primary">Respond</a>
+        <a href="/Messages/writemessage/<?=$corr_id?>" class="btn btn-db-xv">Respond</a>
     </div>
 </main>
 

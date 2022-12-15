@@ -2,42 +2,42 @@
 
 <?= $this->section('content') ?>
 
-<main class="container">
+<main class="container-xv">
     <h2>Delivery</h2>
     <div class="row">
-        <div class="col-sm-6" style="margin-bottom: 10px;">
+        <div class="col-sm-6 form-xv">
             <?php if(isset($validation)) : ?>
                 <div class="alert alert-danger text-center">
                     <?= $validation->listErrors() ?>
                 </div>
             <?php endif ; ?>
-            <form action="/Checkout/delivery" method="post">
-                <div class="form-floating">
+            <form action="/Checkout/delivery" method="post" id="form">
+                <div class="form-floating inputfield-xv">
                     <input class="form-control" type="text" name="country" id="country">
                     <label for="country">Country</label>
                 </div>
-                <div class="form-floating">
+                <div class="form-floating inputfield-xv">
                     <input class="form-control" type="text" name="city" id="city">
                     <label for="city">City</label>
                 </div>
-                <div class="form-floating">
+                <div class="form-floating inputfield-xv">
                     <input class="form-control" type="text" name="postal" id="postal">
                     <label for="postal">Postal code</label>
                 </div>
-                <div class="form-floating">
+                <div class="form-floating inputfield-xv">
                     <input class="form-control" type="text" name="street" id="street">
                     <label for="street">Street name</label>
                 </div>
-                <div class="form-floating">
+                <div class="form-floating inputfield-xv">
                     <input class="form-control" type="text" name="number" id="number">
                     <label for="number">House number</label>
                 </div>
-                <button class="btn btn-primary" type="submit">Order</button>
+                <button class="btn btn-db-xv" type="submit">Order</button>
             </form>
         </div>
         <div class="col-sm-6">
             <?php foreach ($products as $product):?>
-                <div class="card" style="margin-bottom: 10px;">
+                <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-6">
@@ -56,6 +56,8 @@
         </div>
     </div>
 </main>
+
+<script src="<?= base_url('/JS/delivery.js')?>"></script>
 
 
 <?= $this->endSection('content')?>

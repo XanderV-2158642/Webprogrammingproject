@@ -1,0 +1,25 @@
+.cartitem-link-xv{
+    color:#02254b;
+}
+.cartitem-link-xv:hover{
+    color:#134a84;
+}
+
+.checkout-xv{
+    margin-bottom: 1rem;
+}
+
+.btn-db-xv{
+    display: inline-block;
+    margin-top: 0.4rem;
+    margin-bottom: 0.6rem;
+}
+
+.form-xv{
+    margin-bottom: 1rem;
+}
+
+.inputfield-xv{
+    margin-top: 0.4rem;
+    margin-bottom: 0.4rem;
+}

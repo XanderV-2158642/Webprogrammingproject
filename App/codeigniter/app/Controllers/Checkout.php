@@ -30,7 +30,10 @@ class Checkout extends BaseController
 
         $data = [
             'products' => $products, 
-            'price' => $totalprice
+            'price' => $totalprice,
+            'stylesheets' => [
+                '/CSS/orders.css'
+            ]
         ];
 
         if (empty($cartitems)){
@@ -73,7 +76,11 @@ class Checkout extends BaseController
 
         $data = [
             'products' => $products, 
-            'price' => $totalprice
+            'price' => $totalprice,
+            'stylesheets' => [
+                '/CSS/orders.css',
+                '/CSS/products.css'
+            ]
         ];
 
         if ($this->request->getMethod()=='post'){
@@ -158,7 +165,10 @@ class Checkout extends BaseController
 
         $data = [
             'products' => $products, 
-            'price' => $totalprice
+            'price' => $totalprice,
+            'stylesheets' => [
+                '/CSS/orders.css'
+            ]
         ];
 
         if ($this->request->getMethod()=='post'){

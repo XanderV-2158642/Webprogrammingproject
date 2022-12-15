@@ -2,14 +2,14 @@
 
 <?= $this->section('content') ?>
 
-<main class="container">
+<main class="container-xv">
     <h2>Orders</h2>
     <hr>
     <h3>Buyer</h3>
     <div>
         <h4>Placed orders</h4>
         <?php foreach($placed_orders as $p_o):?>
-            <div class="card w-75" style="margin-bottom: 10px;">
+            <div class="card w-75 card-xv">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-4">
@@ -32,16 +32,16 @@
                             <?php if(isset($p_o['order']['delivered'])):
                                     if($p_o['order']['delivered']):?>
                                         <a href="" class="btn btn-secondary disabled" style="margin-bottom:5px;">Order delivered</a><br>
-                                        <a href="" class="btn btn-primary">Write review</a>
+                                        <a href="" class="btn btn-db-xv">Write review</a>
                                     <?php else:?>
-                                        <a href="/Orders/cancelorder/delivery/<?= $p_o['order']['order_id']?>" class="btn btn-danger">Cancel</a>
+                                        <a href="/Orders/cancelorder/delivery/<?= $p_o['order']['order_id']?>" class="btn btn-dr-xv">Cancel</a>
                                     <?php endif;?>          
                             <?php elseif(isset($p_o['order']['pickedup'])):
                                 if($p_o['order']['pickedup']):?>
                                     <a href="" class="btn btn-secondary disabled" style="margin-bottom:5px;">Order picked up</a><br>
-                                    <a href="" class="btn btn-primary">Write review</a>
+                                    <a href="" class="btn btn-db-xv">Write review</a>
                                 <?php else:?>
-                                    <a href="/Orders/cancelorder/pickup/<?= $p_o['order']['order_id']?>" class="btn btn-danger">Cancel</a>
+                                    <a href="/Orders/cancelorder/pickup/<?= $p_o['order']['order_id']?>" class="btn btn-dr-xv">Cancel</a>
                                 <?php endif;?>
                             <?php endif;?>
                         </div>
@@ -77,19 +77,19 @@
                                     if($p_o_d['order']['delivered']):?>
                                         <a href="" class="btn btn-secondary disabled" style="margin-bottom:5px;">Order delivered</a><br>
                                         <?php if(!isset($p_o_d['order']['reviewwritten'])):?>
-                                            <a href="/Reviews/writereview/<?=$p_o_d['product']['product_id']?>" class="btn btn-primary">Write review</a>
+                                            <a href="/Reviews/writereview/<?=$p_o_d['product']['product_id']?>" class="btn btn-db-xv">Write review</a>
                                         <?php endif;?>
                                     <?php else:?>
-                                        <a href="/Orders/cancelorder/delivery/<?= $p_o_d['order']['order_id']?>" class="btn btn-danger">Cancel</a>
+                                        <a href="/Orders/cancelorder/delivery/<?= $p_o_d['order']['order_id']?>" class="btn btn-dr-xv">Cancel</a>
                                     <?php endif;?>          
                             <?php elseif(isset($p_o_d['order']['pickedup'])):
                                 if($p_o_d['order']['pickedup']):?>
                                     <a href="" class="btn btn-secondary disabled" style="margin-bottom:5px;">Order picked up</a><br>
                                     <?php if(!isset($p_o_d['order']['reviewwritten'])):?>
-                                        <a href="/Reviews/writereview/<?=$p_o_d['product']['product_id']?>" class="btn btn-primary">Write review</a>
+                                        <a href="/Reviews/writereview/<?=$p_o_d['product']['product_id']?>" class="btn btn-db-xv">Write review</a>
                                     <?php endif;?>
                                 <?php else:?>
-                                    <a href="/Orders/cancelorder/pickup/<?= $p_o_d['order']['order_id']?>" class="btn btn-danger">Cancel</a>
+                                    <a href="/Orders/cancelorder/pickup/<?= $p_o_d['order']['order_id']?>" class="btn btn-dr-xv">Cancel</a>
                                 <?php endif;?>
                             <?php endif;?>
                         </div>
@@ -124,9 +124,9 @@
                         </div>
                         <div class="col-sm-4 text-center">
                             <?php if(isset($u_o['order']['delivered'])):?>
-                                    <a href="/Orders/completeOrder/delivery/<?=$u_o['order']['order_id']?>" class="btn btn-success">Confirm delivery</a>
+                                    <a href="/Orders/completeOrder/delivery/<?=$u_o['order']['order_id']?>" class="btn btn-ve-xv">Confirm delivery</a>
                             <?php elseif(isset($u_o['order']['pickedup'])):?>
-                                <a href="/Orders/completeOrder/pickup/<?=$u_o['order']['order_id']?>" class="btn btn-success">Confirm pickup</a>
+                                <a href="/Orders/completeOrder/pickup/<?=$u_o['order']['order_id']?>" class="btn btn-ve-xv">Confirm pickup</a>
                             <?php endif;?>
                         </div>
                     </div>

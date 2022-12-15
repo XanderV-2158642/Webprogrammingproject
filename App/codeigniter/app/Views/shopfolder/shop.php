@@ -2,7 +2,7 @@
 
 <?= $this->section('content') ?>
 
-<main class = "container">
+<main class = "container-xv">
     <!-- Product cards -->
     <div class = "row m-auto">
         <?php foreach ($products as $product):?>
@@ -26,7 +26,7 @@
                             <?php if ($product['product_type'] !== 'electricity'):?>
                             <h5 class="text-black-50">of <?= $product['product_size']." ".$product['unit']?></h5>
                             <?php else: echo '<br>'; endif;?>
-                            <a href="/Product/productpage/<?= $product['product_id']?>" class="btn btn-primary">Buy</a>
+                            <a href="/Product/productpage/<?= $product['product_id']?>" class="btn btn-db-xv">Buy</a>
                         </div>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
     <!-- Product cards -->
 
     <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
+        <ul class="pagination pagination-xv justify-content-center">
             <li class="page-item <?= $pagenr == 1 ? 'disabled' : ''?>">
                 <a class="page-link" href="/Shop/shoppage/<?=$pagenr-1?>">Previous</a>
             </li>

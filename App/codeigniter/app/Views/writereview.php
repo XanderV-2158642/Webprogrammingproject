@@ -2,7 +2,7 @@
 
 <?= $this->section('content') ?>
 
-<main class="container">
+<main class="container-xv">
     <h2>Review for <?= $product['product_title']?></h2>
     <?php if(isset($validation)) : ?>
         <div class="alert alert-danger text-center">
@@ -16,12 +16,12 @@
                     <input class="form-control" type="number" name="score" id="score">
                     <label for="score">Rate this item from 1 to 5</label>
                 </div>
-                <button class="btn btn-primary" type="submit" style="margin: 10px;">Submit</button>
+                <button class="btn btn-db-xv" type="submit">Submit</button>
             </div>
             <div class="col-sm-8">
                 <div class="form-floating">
                     <textarea class="form-control" name="description" id="description" style="height:100px;"></textarea>
-                    <label for="id">Explain your score</label>
+                    <label for="description">Explain your score</label>
                 </div>
             </div>
         </div>

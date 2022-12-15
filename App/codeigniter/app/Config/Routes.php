@@ -40,7 +40,7 @@ $routes->get('/', 'Home::index', ['filter' => 'auth']);
 
 $routes->group('Shop', ['filter' => 'auth'], static function ($routes) {
     $routes->get('/', 'Shop::index');
-    $routes->get('shoppage/(:any)', 'Shop::shoppage');
+    $routes->get('shoppage/(:any)', 'Shop::shoppage/$1');
     $routes->get('wood', 'Shop::Wood');
     $routes->get('wood/(:num)', 'Shop::Wood/$1');
     $routes->get('oil', 'Shop::oil');
@@ -68,6 +68,7 @@ $routes->group( 'Product', ['filter' => 'auth'], static function ($routes){
     $routes->post('edit/(:num)', 'Product::edit/$1');
     $routes->get('removepic/(:num)', 'Product::removepic/$1');
     $routes->get('removeproduct/(:num)', 'Product::removeproduct/$1');
+    $routes->get('removevid/(:num)', 'Product::removevid/$1');
 });
 
 
@@ -96,6 +97,7 @@ $routes->group('Messages', ['filter' => 'auth'], static function ($routes) {
     $routes->get('/', 'Messages::index');
     $routes->get('chat/(:num)', 'Messages::chat/$1');
     $routes->get('writemessage/(:num)', 'Messages::writemessage/$1');
+    $routes->post('writemessage/(:num)', 'Messages::writemessage/$1');
 });
 
 
