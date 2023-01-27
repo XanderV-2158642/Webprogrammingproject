@@ -64,7 +64,7 @@
                     </form>
                     <?php else:?>
                         <h6>No items left, Want to receive a notification when item is back in stock?</h6>
-                        <a class="btn btn-db-xv" href="/notifications/addnotification/<?=$product['product_id']?>"> Notify me </a>
+                        <a class="btn btn-db-xv" href="/Notifications/addnotification/<?=$product['product_id']?>"> Notify me </a>
                     <?php endif;?>
                 </div>
                 <div class="col-md-6 text-center">

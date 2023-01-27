@@ -17,8 +17,6 @@
     </div>
     <h2 class="page-title-xv">Welcome to the Energyshop</h2>
 
-    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. At magni similique eligendi ipsam qui, accusamus, iure temporibus natus illo odit, harum aut sequi blanditiis reprehenderit consequatur culpa voluptates! Illo, nihil.</p>
-
     <div class = "card w-75 card-xv" >
         <div class = "card-body">
             <h4>Shop</h4>

@@ -37,6 +37,11 @@ $routes->setAutoRoute(false);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index', ['filter' => 'auth']);
 
+$routes->group('Other', ['filter' => 'auth'], static function ($routes) {
+    $routes->get('accessibility', 'Other::accessibility');
+    $routes->get('contact', 'Other::contact');
+});
+
 
 $routes->group('Shop', ['filter' => 'auth'], static function ($routes) {
     $routes->get('/', 'Shop::index');

@@ -1,0 +1,11 @@
+Commando's om op te starten
+
+Zoals in Devops slides:
+    Image Bouwen
+    docker build -t yourImageTag .
+
+    Run container
+    docker run -p "8080:80" -v ${PWD}/codeigniter:/app -v ${PWD}/mysql:/var/lib/mysql yourImageTag
+
+Password voor PHPMyAdmin:
+    z6VXm71OTfye

@@ -59,8 +59,8 @@
                 <legend class ="col-form-label col-sm-3">Sort</legend>
                 <div class = "col-sm-9">
                     <div class ="form-check">
-                        <input type="radio" name="product_sort" value="petroluem" id="petroluem" class="form-check-input" <?= ($product['product_sort'] =='petroleum' ? 'checked' : '')?>>
-                        <label for="petroluem" class="form-check-label">Petroluem</label>
+                        <input type="radio" name="product_sort" value="petroleum" id="petroluem" class="form-check-input" <?= ($product['product_sort'] =='petroleum' ? 'checked' : '')?>>
+                        <label for="petroluem" class="form-check-label">Petroleum</label>
                     </div>
                     <div class ="form-check">
                         <input type="radio" name="product_sort" value="synthetic" id="synthetic" class="form-check-input" <?= ($product['product_sort'] =='synthetic' ? 'checked' : '')?>>

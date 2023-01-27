@@ -447,19 +447,21 @@ class Product extends BaseController {
         $session_user = session()->get('user_id');
 
         if ($session_user == $product['user_id']){
-            $picturetable = new ProductpicModel();
-            $pictures = $picturetable->where('product_id', $product['product_id'])->findAll();
-            foreach ($pictures as $pic){
-                $this->removepic($pic['picture_id']);
-            }
+            // $picturetable = new ProductpicModel();
+            // $pictures = $picturetable->where('product_id', $product['product_id'])->findAll();
+            // foreach ($pictures as $pic){
+            //     $this->removepic($pic['picture_id']);
+            // }
 
-            $videotable = new ProductVideoModel();
-            $vids = $videotable->where('product_id', $product_id)->findAll();
-            foreach ($vids as $vid) {
-                $this->removevid($vid['video_id']);
-            }
-
-            $producttable->delete($product_id);
+            // $videotable = new ProductVideoModel();
+            // $vids = $videotable->where('product_id', $product_id)->findAll();
+            // foreach ($vids as $vid) {
+            //     $this->removevid($vid['video_id']);
+            // }
+            $data = [
+                'product_amount' => 0
+            ];
+            $producttable->update($product_id, $data);
             return redirect()->back();
         }
     }

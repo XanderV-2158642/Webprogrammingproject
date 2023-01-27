@@ -77,13 +77,10 @@
     <div class="container-fluid">
         <div class = "row">
             <div class="col-lg text-center">
-                <a class="link-xv" href="#">Contact</a>
+                <a class="link-xv" href="<?= base_url("Other/contact")?>">Contact</a>
             </div>
             <div class="col-lg text-center">
-                <a class="link-xv" href="#">Accessibility</a>
-            </div>
-            <div class="col-lg text-center">
-                <a class="link-xv" href="#">Terms of bussiness</a>
+                <a class="link-xv" href="<?= base_url("Other/accessibility")?>">Accessibility</a>
             </div>
         </div>
     </div>

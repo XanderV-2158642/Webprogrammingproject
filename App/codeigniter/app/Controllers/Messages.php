@@ -16,11 +16,12 @@ class Messages extends BaseController
             $corr_id = $this->corresponder($chat);
             $usertable = new UserModel();
             $corresponder = $usertable->find($corr_id);
+            $lastmessage = $this->getLastMessage($corr_id);
 
             $chatinfo = [
                 'corresponder' => $corresponder['user_name'],
                 'corresponder_id' => $corr_id,
-                'lastmessage' => $chat['message'],
+                'lastmessage' => $lastmessage['message'],
                 'chatwr' => $chat,
                 'user_id' => session()->get('user_id')
             ];
@@ -108,13 +109,30 @@ class Messages extends BaseController
         $distinctchats = [];
         $seen = [];
         foreach ($allresults as $chat){
-            if (!(in_array([$chat['writer_id'], $chat['receiver_id']], $seen) && !in_array([$chat['receiver_id'], $chat['writer_id']], $seen))){
+            $pair = [$chat['writer_id'], $chat['receiver_id']];
+            sort($pair);
+            if (!(in_array($pair, $seen))){
                 array_push($distinctchats, $chat);
-                array_push($seen, [$chat['writer_id'], $chat['receiver_id']]);
+                array_push($seen, $pair);
             }
         }
 
         return $distinctchats;
+    }
+
+    private function getLastMessage($corresponder_id){
+        $user_id = session()->get('user_id');
+        
+        $db = db_connect();
+        $querystring = "SELECT *
+                        FROM Messages
+                        WHERE (writer_id = " . $user_id . " AND receiver_id = " . $corresponder_id . ") OR (writer_id = " . $corresponder_id . " AND receiver_id = " . $user_id . ")"
+                     ." ORDER BY timestamp";
+
+        $query = $db->query($querystring);
+        $allresults = $query->getResultArray();
+
+        return end($allresults);
     }
 
     private function corresponder($chat){

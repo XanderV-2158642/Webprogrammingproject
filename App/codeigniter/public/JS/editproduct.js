@@ -19,6 +19,7 @@ function checkInputs(){
     const titlevalue = title.value;
     const pricevalue = price.value;
     const heritagevalue= heritage.value;
+    const descriptionvalue = description.value;
     if (size == null){
         var elec = true;
     } else {

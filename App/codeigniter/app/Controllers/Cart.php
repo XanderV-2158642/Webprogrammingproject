@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\CartModel;
 use App\Models\ProductModel;
 use CodeIgniter\HTTP\Response;
+use PHPUnit\Framework\Constraint\IsEmpty;
 use SebastianBergmann\CodeCoverage\Report\Xml\Method;
 
 class Cart extends BaseController
@@ -46,7 +47,12 @@ class Cart extends BaseController
 
     public function addtocart($product_id){
         $cart = new CartModel();
-        
+
+        $incart = $cart->where('user_id', session()->get('user_id'))->where('product_id', $product_id)->findAll();
+        if (!empty($incart)){
+            session()->setFlashdata('amount_input', 'Item is already in cart, amount can be changed there.');
+            return redirect()->to(base_url('/Product/productpage/'.$product_id));
+        }
 
         helper (['form']);
 

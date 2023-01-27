@@ -9,6 +9,10 @@ use App\Models\PickupModel;
 class Checkout extends BaseController
 {
     public function index(){
+        if (!$this->cartavailable()){
+            return redirect()->to(base_url('/Cart'));
+        }
+
         helper(['form']);
 
         $user_id = session()->get('user_id');
@@ -55,6 +59,11 @@ class Checkout extends BaseController
     }
 
     public function delivery(){
+        if (!$this->cartavailable()){
+            return redirect()->to(base_url('/Cart'));
+        }
+
+
         helper(['form']);
 
         $user_id = session()->get('user_id');
@@ -144,6 +153,10 @@ class Checkout extends BaseController
     }
 
     public function pickup(){
+        if (!$this->cartavailable()){
+            return redirect()->to(base_url('/Cart'));
+        }
+
         helper(['form']);
 
         $user_id = session()->get('user_id');
@@ -223,5 +236,28 @@ class Checkout extends BaseController
             //remove product out of cart
             $carttable->delete($product['itemrow']['cart_item_id']);
         }
+    }
+
+    private function cartavailable(): bool{
+        $carttable = new CartModel();
+        $producttable = new ProductModel();
+
+        $user_id = session()->get('user_id');
+
+        $items = $carttable->where('user_id', $user_id)->findAll();
+
+        foreach($items as $item){
+            $product = $producttable->find($item['product_id']);
+            if ($product['product_amount'] < $item['product_amount']){
+                if ($product['product_amount'] == 0){
+                    $carttable->delete($item['cart_item_id']);
+                    return false;
+                }
+                $item['product_amount'] = $product['product_amount'];
+                $carttable->update($item['cart_item_id'], $item);
+                return false;
+            }
+        }
+        return true;
     }
 }

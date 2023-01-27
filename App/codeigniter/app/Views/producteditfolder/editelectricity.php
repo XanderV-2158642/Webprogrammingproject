@@ -4,7 +4,7 @@
 
 <main class="container-xv">
     <div class="">
-        <h2>edit this oil product</h2>
+        <h2>edit this Electricity product</h2>
         <?php if(isset($validation)) : ?>
             <div class="alert alert-danger text-center">
                 <?= $validation->listErrors() ?>
